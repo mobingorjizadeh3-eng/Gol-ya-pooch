@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>گل یا پوچ | Gol ya Poch</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg1: #0f0f1a;
+      --bg2: #1a1a2e;
+      --card: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.1);
+      --gold: #ffd700;
+      --gold-dark: #e6b800;
+      --green: #00e676;
+      --red: #ff5252;
+      --text: #ffffff;
+      --text-muted: rgba(255,255,255,0.65);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Vazirmatn', 'Inter', Tahoma, sans-serif;
+      background: linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 50%, #16213e 100%);
+      min-height: 100vh;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      padding: 16px 14px 30px;
+    }
+
+    body.en {
+      font-family: 'Inter', 'Vazirmatn', sans-serif;
+      direction: ltr;
+    }
+
+    .screen {
+      display: none;
+      width: 100%;
+      max-width: 400px;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.35s ease;
+    }
+    .screen.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      font-size: 2.4rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #ffd700, #ffaa00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      flex: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 10px;
+      text-align: center;
+    }
+
+    .stat-card .num {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .stat-card .lbl {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .menu-btn {
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      border: none;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 12px;
+      transition: transform 0.15s ease, opacity 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .menu-btn:active {
+      transform: scale(0.97);
+    }
+
+    .menu-btn.primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #1a1a2e;
+    }
+
+    .menu-btn.secondary {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .menu-btn.ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+      font-size: 0.9rem;
+    }
+
+    .top-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .score-board {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 18px;
+    }
+
+    .score-box {
+      flex: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+      transition: border-color 0.3s;
+    }
+
+    .score-box.active-turn {
+      border-color: var(--gold);
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.2);
+    }
+
+    .score-box .label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+
+    .score-box .value {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .status {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 22px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hands-container {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 28px;
+      position: relative;
+      min-height: 160px;
+    }
+
+    .hand {
+      width: 125px;
+      height: 145px;
+      background: linear-gradient(165deg, #252545, #1a1a32);
+      border-radius: 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.34, 1.3, 0.64, 1);
+      border: 3px solid rgba(255,255,255,0.08);
+      position: relative;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+    }
+
+    .hand:active {
+      transform: scale(0.95);
+    }
+
+    .hand.selected {
+      border-color: var(--gold);
+      box-shadow: 0 0 22px rgba(255, 215, 0, 0.35);
+      transform: translateY(-8px);
+    }
+
+    .hand.correct {
+      border-color: var(--green);
+      box-shadow: 0 0 24px rgba(0, 230, 118, 0.45);
+    }
+
+    .hand.wrong {
+      border-color: var(--red);
+      box-shadow: 0 0 24px rgba(255, 82, 82, 0.4);
+    }
+
+    .hand-icon {
+      font-size: 3rem;
+      margin-bottom: 6px;
+      transition: transform 0.3s;
+    }
+
+    .hand.selected .hand-icon {
+      transform: scale(1.12);
+    }
+
+    .hand-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .flower {
+      position: absolute;
+      font-size: 2.1rem;
+      opacity: 0;
+      transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
+      z-index: 10;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+    }
+
+    .flower.visible {
+      opacity: 1;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .btn {
+      font-family: inherit;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: #1a1a2e;
+    }
+
+    .btn-secondary {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-danger {
+      background: rgba(255, 82, 82, 0.15);
+      color: #ff8a80;
+      border: 1px solid rgba(255, 82, 82, 0.25);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.78);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      padding: 20px;
+    }
+
+    .overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      background: linear-gradient(165deg, #22223a, #1a1a2e);
+      border-radius: 22px;
+      padding: 28px 24px;
+      text-align: center;
+      max-width: 320px;
+      width: 100%;
+      border: 1px solid var(--border);
+      transform: scale(0.92);
+      transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+    }
+
+    .overlay.show .modal {
+      transform: scale(1);
+    }
+
+    .modal-icon {
+      font-size: 3.2rem;
+      margin-bottom: 10px;
+    }
+
+    .modal-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .modal-msg {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+      line-height: 1.5;
+    }
+
+    .settings-group {
+      text-align: right;
+      margin-bottom: 18px;
+    }
+
+    body.en .settings-group {
+      text-align: left;
+    }
+
+    .settings-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .option-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .option-btn {
+      flex: 1;
+      padding: 10px 6px;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .option-btn.active {
+      border-color: var(--gold);
+      background: rgba(255, 215, 0, 0.12);
+      color: var(--gold);
+    }
+
+    .switching {
+      animation: switchAnim 0.55s ease;
+    }
+
+    @keyframes switchAnim {
+      0% { transform: translateX(0); }
+      30% { transform: translateX(-12px) rotate(-4deg); }
+      60% { transform: translateX(12px) rotate(4deg); }
+      100% { transform: translateX(0); }
+    }
+
+    .how-to {
+      text-align: right;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    body.en .how-to {
+      text-align: left;
+    }
+
+    .how-to li {
+      margin-bottom: 8px;
+    }
+
+    .footer {
+      margin-top: 24px;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.35);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- HOME SCREEN -->
+  <div class="screen active" id="homeScreen">
+    <div class="logo" id="logoText">🌸 گل یا پوچ</div>
+    <div class="subtitle" id="subtitleText">نسخه آزمایشی حرفه‌ای</div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="num" id="statWins">0</div>
+        <div class="lbl" id="lblWins">بردها</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="statStreak">0</div>
+        <div class="lbl" id="lblStreak">سری برد</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="statBest">0</div>
+        <div class="lbl" id="lblBest">بهترین</div>
+      </div>
+    </div>
+
+    <button class="menu-btn primary" id="btnPlay">شروع بازی</button>
+    <button class="menu-btn secondary" id="btnHowTo">چطور بازی کنیم؟</button>
+    <button class="menu-btn secondary" id="btnSettings">تنظیمات</button>
+    <button class="menu-btn ghost" id="btnLang">English</button>
+
+    <div class="footer">Gol ya Poch • Ready for GitHub</div>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div class="screen" id="gameScreen">
+    <div class="top-bar">
+      <button class="icon-btn" id="btnBack">←</button>
+      <div style="font-size:0.9rem;font-weight:600;" id="gameTitle">مقابل کامپیوتر</div>
+      <button class="icon-btn" id="btnGameSettings">⚙</button>
+    </div>
+
+    <div class="score-board">
+      <div class="score-box" id="box1">
+        <div class="label" id="label1">شما</div>
+        <div class="value" id="score1">0</div>
+      </div>
+      <div class="score-box" id="box2">
+        <div class="label" id="label2">کامپیوتر</div>
+        <div class="value" id="score2">0</div>
+      </div>
+    </div>
+
+    <div class="status" id="status">—</div>
+
+    <div class="hands-container" id="handsContainer">
+      <div class="hand" id="handLeft" data-hand="left">
+        <div class="hand-icon">✊</div>
+        <div class="hand-label" id="lblLeft">دست چپ</div>
+      </div>
+      <div class="hand" id="handRight" data-hand="right">
+        <div class="hand-icon">✊</div>
+        <div class="hand-label" id="lblRight">دست راست</div>
+      </div>
+      <div class="flower" id="flower">🌸</div>
+    </div>
+
+    <div class="controls">
+      <button class="btn btn-primary hidden" id="mainBtn">آماده ✓</button>
+      <button class="btn btn-secondary hidden" id="switchBtn">جابه‌جایی گل 🔄</button>
+      <button class="btn btn-danger" id="btnQuit">خروج از بازی</button>
+    </div>
+  </div>
+
+  <!-- RESULT OVERLAY -->
+  <div class="overlay" id="resultOverlay">
+    <div class="modal">
+      <div class="modal-icon" id="resultIcon">🎉</div>
+      <div class="modal-title" id="resultTitle">بردی!</div>
+      <div class="modal-msg" id="resultMessage">گل تو دست چپ بود</div>
+      <button class="btn btn-primary" id="nextRoundBtn" style="width:100%">دور بعد</button>
+    </div>
+  </div>
+
+  <!-- SETTINGS OVERLAY -->
+  <div class="overlay" id="settingsOverlay">
+    <div class="modal" style="text-align:right;">
+      <div class="modal-title" id="settingsTitle" style="text-align:center;margin-bottom:20px;">تنظیمات</div>
+
+      <div class="settings-group">
+        <label id="lblDifficulty">سطح سختی</label>
+        <div class="option-row">
+          <button class="option-btn" data-diff="easy" id="diffEasy">آسان</button>
+          <button class="option-btn active" data-diff="medium" id="diffMedium">متوسط</button>
+          <button class="option-btn" data-diff="hard" id="diffHard">سخت</button>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <label id="lblMode">حالت بازی</label>
+        <div class="option-row">
+          <button class="option-btn active" data-mode="ai" id="modeAi">مقابل کامپیوتر</button>
+          <button class="option-btn" data-mode="local" id="modeLocal">دو نفره</button>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="btnCloseSettings" style="width:100%;margin-top:10px;">بستن</button>
+    </div>
+  </div>
+
+  <!-- HOW TO PLAY -->
+  <div class="overlay" id="howtoOverlay">
+    <div class="modal">
+      <div class="modal-title" id="howtoTitle">چطور بازی کنیم؟</div>
+      <ol class="how-to" id="howtoList" style="margin:16px 0 22px;padding-right:18px;">
+        <li>یکی از بازیکن‌ها گل را در یکی از دست‌هایش مخفی می‌کند.</li>
+        <li>می‌تواند چند بار گل را بین دست‌ها جابه‌جا کند.</li>
+        <li>بازیکن مقابل باید حدس بزند گل در کدام دست است.</li>
+        <li>اگر درست حدس بزند، نوبت مخفی کردن به او می‌رسد.</li>
+        <li>اگر اشتباه حدس بزند، مخفی‌کننده امتیاز می‌گیرد.</li>
+      </ol>
+      <button class="btn btn-primary" id="btnCloseHowto" style="width:100%">متوجه شدم</button>
+    </div>
+  </div>
+
+  <script>
+    const i18n = {
+      fa: {
+        logo: "🌸 گل یا پوچ",
+        subtitle: "نسخه آزمایشی حرفه‌ای",
+        wins: "بردها",
+        streak: "سری برد",
+        best: "بهترین",
+        play: "شروع بازی",
+        howto: "چطور بازی کنیم؟",
+        settings: "تنظیمات",
+        langBtn: "English",
+        you: "شما",
+        computer: "کامپیوتر",
+        player1: "بازیکن ۱",
+        player2: "بازیکن ۲",
+        left: "دست چپ",
+        right: "دست راست",
+        ready: "آماده ✓",
+        switch: "جابه‌جایی گل 🔄",
+        quit: "خروج از بازی",
+        next: "دور بعد",
+        settingsTitle: "تنظیمات",
+        difficulty: "سطح سختی",
+        easy: "آسان",
+        medium: "متوسط",
+        hard: "سخت",
+        mode: "حالت بازی",
+        vsAi: "مقابل کامپیوتر",
+        local: "دو نفره",
+        close: "بستن",
+        howtoTitle: "چطور بازی کنیم؟",
+        howtoItems: [
+          "یکی از بازیکن‌ها گل را در یکی از دست‌هایش مخفی می‌کند.",
+          "می‌تواند چند بار گل را بین دست‌ها جابه‌جا کند.",
+          "بازیکن مقابل باید حدس بزند گل در کدام دست است.",
+          "اگر درست حدس بزند، نوبت مخفی کردن به او می‌رسد.",
+          "اگر اشتباه حدس بزند، مخفی‌کننده امتیاز می‌گیرد."
+        ],
+        gotIt: "متوجه شدم",
+        hideNow: "گل را در یکی از دست‌ها مخفی کن",
+        hiddenReady: "گل مخفی شد! حالا دکمه «آماده» را بزن",
+        switched: "گل جابه‌جا شد!",
+        aiThinking: "کامپیوتر در حال حدس زدن...",
+        aiHiding: "کامپیوتر داره گل رو مخفی می‌کنه...",
+        yourGuess: "حدس بزن گل کدوم دسته!",
+        p1Hide: "بازیکن ۱: گل را مخفی کن",
+        p2Hide: "بازیکن ۲: گل را مخفی کن",
+        p1Guess: "بازیکن ۱: حدس بزن",
+        p2Guess: "بازیکن ۲: حدس بزن",
+        aiCorrect: "کامپیوتر درست حدس زد!",
+        youBluffed: "آفرین! گولش زدی",
+        youCorrect: "دمت گرم! درست حدس زدی",
+        youWrong: "اشتباه حدس زدی!",
+        pGuessCorrect: "درست حدس زد!",
+        pBluffed: "برنده شد!",
+        flowerWas: "گل تو دست {hand} بود",
+        leftHand: "چپ",
+        rightHand: "راست",
+        vsComputer: "مقابل کامپیوتر",
+        localMatch: "بازی دو نفره"
+      },
+      en: {
+        logo: "🌸 Gol ya Poch",
+        subtitle: "Professional Web Demo",
+        wins: "Wins",
+        streak: "Streak",
+        best: "Best",
+        play: "Play",
+        howto: "How to Play",
+        settings: "Settings",
+        langBtn: "فارسی",
+        you: "You",
+        computer: "Computer",
+        player1: "Player 1",
+        player2: "Player 2",
+        left: "Left Hand",
+        right: "Right Hand",
+        ready: "Ready ✓",
+        switch: "Switch Flower 🔄",
+        quit: "Quit Game",
+        next: "Next Round",
+        settingsTitle: "Settings",
+        difficulty: "Difficulty",
+        easy: "Easy",
+        medium: "Medium",
+        hard: "Hard",
+        mode: "Game Mode",
+        vsAi: "vs Computer",
+        local: "2 Players",
+        close: "Close",
+        howtoTitle: "How to Play",
+        howtoItems: [
+          "One player hides the flower in one of their hands.",
+          "They can switch the flower between hands several times.",
+          "The opponent must guess which hand holds the flower.",
+          "If they guess correctly, they become the next hider.",
+          "If they guess wrong, the hider scores a point."
+        ],
+        gotIt: "Got it",
+        hideNow: "Hide the flower in one hand",
+        hiddenReady: "Flower hidden! Press Ready",
+        switched: "Flower switched!",
+        aiThinking: "Computer is guessing...",
+        aiHiding: "Computer is hiding the flower...",
+        yourGuess: "Guess which hand has the flower!",
+        p1Hide: "Player 1: Hide the flower",
+        p2Hide: "Player 2: Hide the flower",
+        p1Guess: "Player 1: Make your guess",
+        p2Guess: "Player 2: Make your guess",
+        aiCorrect: "Computer guessed right!",
+        youBluffed: "Nice bluff! You got them",
+        youCorrect: "Correct guess!",
+        youWrong: "Wrong guess!",
+        pGuessCorrect: "guessed correctly!",
+        pBluffed: "wins the round!",
+        flowerWas: "Flower was in the {hand} hand",
+        leftHand: "left",
+        rightHand: "right",
+        vsComputer: "vs Computer",
+        localMatch: "Local Match"
+      }
+    };
+
+    let lang = localStorage.getItem('gyp_lang') || 'fa';
+    let difficulty = localStorage.getItem('gyp_diff') || 'medium';
+    let mode = 'ai';
+    let phase = 'idle';
+    let currentHider = 1;
+    let flowerHand = null;
+    let score1 = 0;
+    let score2 = 0;
+    let selectedGuess = null;
+    let isSwitching = false;
+
+    let totalWins = parseInt(localStorage.getItem('gyp_wins') || '0');
+    let currentStreak = parseInt(localStorage.getItem('gyp_streak') || '0');
+    let bestStreak = parseInt(localStorage.getItem('gyp_best') || '0');
+
+    const $ = id => document.getElementById(id);
+    const t = key => i18n[lang][key];
+
+    function applyLanguage() {
+      document.body.classList.toggle('en', lang === 'en');
+      document.documentElement.lang = lang;
+      document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+
+      $('logoText').textContent = t('logo');
+      $('subtitleText').textContent = t('subtitle');
+      $('lblWins').textContent = t('wins');
+      $('lblStreak').textContent = t('streak');
+      $('lblBest').textContent = t('best');
+      $('btnPlay').textContent = t('play');
+      $('btnHowTo').textContent = t('howto');
+      $('btnSettings').textContent = t('settings');
+      $('btnLang').textContent = t('langBtn');
+      $('lblLeft').textContent = t('left');
+      $('lblRight').textContent = t('right');
+      $('mainBtn').textContent = t('ready');
+      $('switchBtn').textContent = t('switch');
+      $('btnQuit').textContent = t('quit');
+      $('nextRoundBtn').textContent = t('next');
+      $('settingsTitle').textContent = t('settingsTitle');
+      $('lblDifficulty').textContent = t('difficulty');
+      $('diffEasy').textContent = t('easy');
+      $('diffMedium').textContent = t('medium');
+      $('diffHard').textContent = t('hard');
+      $('lblMode').textContent = t('mode');
+      $('modeAi').textContent = t('vsAi');
+      $('modeLocal').textContent = t('local');
+      $('btnCloseSettings').textContent = t('close');
+      $('howtoTitle').textContent = t('howtoTitle');
+      $('btnCloseHowto').textContent = t('gotIt');
+
+      const list = $('howtoList');
+      list.innerHTML = '';
+      t('howtoItems').forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        list.appendChild(li);
+      });
+
+      updateLabels();
+      updateGameTitle();
+      updateStatsDisplay();
+    }
+
+    function updateLabels() {
+      if (mode === 'ai') {
+        $('label1').textContent = t('you');
+        $('label2').textContent = t('computer');
+      } else {
+        $('label1').textContent = t('player1');
+        $('label2').textContent = t('player2');
+      }
+    }
+
+    function updateGameTitle() {
+      $('gameTitle').textContent = mode === 'ai' ? t('vsComputer') : t('localMatch');
+    }
+
+    function updateStatsDisplay() {
+      $('statWins').textContent = totalWins;
+      $('statStreak').textContent = currentStreak;
+      $('statBest').textContent = bestStreak;
+    }
+
+    function setStatus(text) {
+      $('status').textContent = text;
+    }
+
+    function clearHandStates() {
+      $('handLeft').classList.remove('selected', 'correct', 'wrong');
+      $('handRight').classList.remove('selected', 'correct', 'wrong');
+    }
+
+    function showFlowerInHand(hand) {
+      const target = hand === 'left' ? $('handLeft') : $('handRight');
+      const rect = target.getBoundingClientRect();
+      const containerRect = $('handsContainer').getBoundingClientRect();
+      const flower = $('flower');
+      flower.style.left = (rect.left - containerRect.left + rect.width / 2 - 16) + 'px';
+      flower.style.top = (rect.top - containerRect.top + 22) + 'px';
+      flower.classList.add('visible');
+    }
+
+    function hideFlower() {
+      $('flower').classList.remove('visible');
+    }
+
+    function enableHands(enable) {
+      $('handLeft').style.pointerEvents = enable ? 'auto' : 'none';
+      $('handRight').style.pointerEvents = enable ? 'auto' : 'none';
+    }
+
+    function highlightTurn() {
+      $('box1').classList.toggle('active-turn', currentHider === 1);
+      $('box2').classList.toggle('active-turn', currentHider === 2);
+    }
+
+    function getAiAccuracy() {
+      if (difficulty === 'easy') return 0.32;
+      if (difficulty === 'hard') return 0.62;
+      return 0.45;
+    }
+
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      $(id).classList.add('active');
+    }
+
+    function startGame() {
+      score1 = 0;
+      score2 = 0;
+      $('score1').textContent = '0';
+      $('score2').textContent = '0';
+      currentHider = 1;
+      phase = 'hiding';
+      flowerHand = null;
+      selectedGuess = null;
+      clearHandStates();
+      hideFlower();
+      $('mainBtn').classList.add('hidden');
+      $('switchBtn').classList.add('hidden');
+      showScreen('gameScreen');
+      updateLabels();
+      updateGameTitle();
+      highlightTurn();
+
+      if (mode === 'ai') {
+        setStatus(t('hideNow'));
+        enableHands(true);
+      } else {
+        setStatus(t('p1Hide'));
+        enableHands(true);
+      }
+    }
+
+    function onHandClick(hand) {
+      if (phase === 'hiding' && currentHider === 1) {
+        flowerHand = hand;
+        clearHandStates();
+        $(hand === 'left' ? 'handLeft' : 'handRight').classList.add('selected');
+        const el = $(hand === 'left' ? 'handLeft' : 'handRight');
+        el.classList.add('switching');
+        setTimeout(() => el.classList.remove('switching'), 550);
+
+        setStatus(t('hiddenReady'));
+        $('mainBtn').classList.remove('hidden');
+        $('switchBtn').classList.remove('hidden');
+        enableHands(false);
+      } else if (phase === 'guessing') {
+        selectedGuess = hand;
+        clearHandStates();
+        $(hand === 'left' ? 'handLeft' : 'handRight').classList.add('selected');
+        setTimeout(() => reveal(), 380);
+      }
+    }
+
+    function confirmHide() {
+      if (!flowerHand) return;
+      clearHandStates();
+      hideFlower();
+      phase = 'guessing';
+      $('mainBtn').classList.add('hidden');
+      $('switchBtn').classList.add('hidden');
+
+      if (mode === 'ai' && currentHider === 1) {
+        setStatus(t('aiThinking'));
+        enableHands(false);
+        setTimeout(() => {
+          const correct = Math.random() < getAiAccuracy();
+          selectedGuess = correct ? flowerHand : (flowerHand === 'left' ? 'right' : 'left');
+          clearHandStates();
+          $(selectedGuess === 'left' ? 'handLeft' : 'handRight').classList.add('selected');
+          setTimeout(() => reveal(), 550);
+        }, 1000 + Math.random() * 600);
+      } else {
+        const guesser = currentHider === 1 ? 2 : 1;
+        setStatus(guesser === 1 ? t('p1Guess') : t('p2Guess'));
+        enableHands(true);
+      }
+    }
+
+    function switchFlower() {
+      if (phase !== 'hiding' || !flowerHand || isSwitching || currentHider !== 1) return;
+      isSwitching = true;
+      flowerHand = flowerHand === 'left' ? 'right' : 'left';
+      clearHandStates();
+      const el = $(flowerHand === 'left' ? 'handLeft' : 'handRight');
+      el.classList.add('selected', 'switching');
+      setTimeout(() => {
+        el.classList.remove('switching');
+        isSwitching = false;
+      }, 550);
+      setStatus(t('switched'));
+    }
+
+    function aiHide() {
+      phase = 'hiding';
+      setStatus(t('aiHiding'));
+      enableHands(false);
+      $('mainBtn').classList.add('hidden');
+      $('switchBtn').classList.add('hidden');
+      clearHandStates();
+      highlightTurn();
+
+      let count = 0;
+      const max = 3 + Math.floor(Math.random() * 3);
+
+      const doSwitch = () => {
+        const el = Math.random() < 0.5 ? $('handLeft') : $('handRight');
+        el.classList.add('switching');
+        setTimeout(() => el.classList.remove('switching'), 420);
+        count++;
+        if (count < max) {
+          setTimeout(doSwitch, 480);
+        } else {
+          flowerHand = Math.random() < 0.5 ? 'left' : 'right';
+          setTimeout(() => {
+            phase = 'guessing';
+            setStatus(t('yourGuess'));
+            enableHands(true);
+          }, 500);
+        }
+      };
+      setTimeout(doSwitch, 350);
+    }
+
+    function reveal() {
+      phase = 'reveal';
+      enableHands(false);
+      showFlowerInHand(flowerHand);
+
+      const correctEl = $(flowerHand === 'left' ? 'handLeft' : 'handRight');
+      const wrongEl = $(flowerHand === 'left' ? 'handRight' : 'handLeft');
+      correctEl.classList.add('correct');
+      if (selectedGuess !== flowerHand) wrongEl.classList.add('wrong');
+
+      const isCorrect = selectedGuess === flowerHand;
+      let title, msg, icon;
+      const handName = flowerHand === 'left' ? t('leftHand') : t('rightHand');
+      msg = t('flowerWas').replace('{hand}', handName);
+
+      if (mode === 'ai') {
+        if (currentHider === 1) {
+          if (isCorrect) {
+            score2++;
+            title = t('aiCorrect');
+            icon = '🤖';
+            currentHider = 2;
+            currentStreak = 0;
+          } else {
+            score1++;
+            title = t('youBluffed');
+            icon = '🎉';
+            currentHider = 1;
+            totalWins++;
+            currentStreak++;
+            if (currentStreak > bestStreak) bestStreak = currentStreak;
+          }
+        } else {
+          if (isCorrect) {
+            score1++;
+            title = t('youCorrect');
+            icon = '🔥';
+            currentHider = 1;
+            totalWins++;
+            currentStreak++;
+            if (currentStreak > bestStreak) bestStreak = currentStreak;
+          } else {
+            score2++;
+            title = t('youWrong');
+            icon = '😈';
+            currentHider = 2;
+            currentStreak = 0;
+          }
+        }
+        saveStats();
+      } else {
+        const guesser = currentHider === 1 ? 2 : 1;
+        if (isCorrect) {
+          if (guesser === 1) score1++; else score2++;
+          title = `${guesser === 1 ? t('player1') : t('player2')} ${t('pGuessCorrect')}`;
+          icon = '🎯';
+          currentHider = guesser;
+        } else {
+          if (currentHider === 1) score1++; else score2++;
+          title = `${currentHider === 1 ? t('player1') : t('player2')} ${t('pBluffed')}`;
+          icon = '🎭';
+        }
+      }
+
+      $('score1').textContent = score1;
+      $('score2').textContent = score2;
+      $('resultIcon').textContent = icon;
+      $('resultTitle').textContent = title;
+      $('resultMessage').textContent = msg;
+
+      setTimeout(() => $('resultOverlay').classList.add('show'), 650);
+    }
+
+    function nextRound() {
+      $('resultOverlay').classList.remove('show');
+      hideFlower();
+      clearHandStates();
+      flowerHand = null;
+      selectedGuess = null;
+      $('mainBtn').classList.add('hidden');
+      $('switchBtn').classList.add('hidden');
+      highlightTurn();
+
+      if (mode === 'ai') {
+        if (currentHider === 1) {
+          phase = 'hiding';
+          setStatus(t('hideNow'));
+          enableHands(true);
+        } else {
+          aiHide();
+        }
+      } else {
+        phase = 'hiding';
+        setStatus(currentHider === 1 ? t('p1Hide') : t('p2Hide'));
+        enableHands(true);
+      }
+    }
+
+    function saveStats() {
+      localStorage.setItem('gyp_wins', totalWins);
+      localStorage.setItem('gyp_streak', currentStreak);
+      localStorage.setItem('gyp_best', bestStreak);
+      updateStatsDisplay();
+    }
+
+    $('btnPlay').onclick = startGame;
+    $('btnBack').onclick = () => {
+      showScreen('homeScreen');
+      updateStatsDisplay();
+    };
+    $('btnQuit').onclick = () => {
+      showScreen('homeScreen');
+      updateStatsDisplay();
+    };
+
+    $('btnHowTo').onclick = () => $('howtoOverlay').classList.add('show');
+    $('btnCloseHowto').onclick = () => $('howtoOverlay').classList.remove('show');
+
+    $('btnSettings').onclick = openSettings;
+    $('btnGameSettings').onclick = openSettings;
+    $('btnCloseSettings').onclick = () => $('settingsOverlay').classList.remove('show');
+
+    function openSettings() {
+      document.querySelectorAll('[data-diff]').forEach(b => {
+        b.classList.toggle('active', b.dataset.diff === difficulty);
+      });
+      document.querySelectorAll('[data-mode]').forEach(b => {
+        b.classList.toggle('active', b.dataset.mode === mode);
+      });
+      $('settingsOverlay').classList.add('show');
+    }
+
+    document.querySelectorAll('[data-diff]').forEach(btn => {
+      btn.onclick = () => {
+        difficulty = btn.dataset.diff;
+        localStorage.setItem('gyp_diff', difficulty);
+        document.querySelectorAll('[data-diff]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      };
+    });
+
+    document.querySelectorAll('[data-mode]').forEach(btn => {
+      btn.onclick = () => {
+        mode = btn.dataset.mode;
+        document.querySelectorAll('[data-mode]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        updateLabels();
+        updateGameTitle();
+      };
+    });
+
+    $('btnLang').onclick = () => {
+      lang = lang === 'fa' ? 'en' : 'fa';
+      localStorage.setItem('gyp_lang', lang);
+      applyLanguage();
+    };
+
+    $('handLeft').onclick = () => onHandClick('left');
+    $('handRight').onclick = () => onHandClick('right');
+
+    $('mainBtn').onclick = confirmHide;
+    $('switchBtn').onclick = switchFlower;
+    $('nextRoundBtn').onclick = nextRound;
+
+    applyLanguage();
+    updateStatsDisplay();
+  </script>
+</body>
+</html>
