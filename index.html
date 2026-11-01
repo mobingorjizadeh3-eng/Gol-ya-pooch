@@ -18,19 +18,40 @@
       --red: #ff5252;
       --text: #ffffff;
       --text-muted: rgba(255,255,255,0.65);
+      --hand-bg: linear-gradient(165deg, #252545, #1a1a32);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
+    body.theme-classic {
+      --bg1: #0f0f1a; --bg2: #1a1a2e; --gold: #ffd700; --gold-dark: #e6b800;
+      --hand-bg: linear-gradient(165deg, #252545, #1a1a32);
     }
+    body.theme-traditional {
+      --bg1: #1c1209; --bg2: #2c1c0f; --gold: #e8b86d; --gold-dark: #c9954a;
+      --card: rgba(232,184,109,0.08); --border: rgba(232,184,109,0.18);
+      --hand-bg: linear-gradient(165deg, #3d2b1a, #2a1c10);
+    }
+    body.theme-neon {
+      --bg1: #0a0a12; --bg2: #120a1f; --gold: #00f5d4; --gold-dark: #00c4a7;
+      --card: rgba(0,245,212,0.06); --border: rgba(0,245,212,0.15);
+      --hand-bg: linear-gradient(165deg, #1a1030, #120a22);
+      --green: #39ff14; --red: #ff2d55;
+    }
+    body.theme-cafe {
+      --bg1: #1a1410; --bg2: #2a2118; --gold: #d4a373; --gold-dark: #b0895a;
+      --card: rgba(212,163,115,0.08); --border: rgba(212,163,115,0.18);
+      --hand-bg: linear-gradient(165deg, #3a2e22, #2a2118);
+    }
+    body.theme-night {
+      --bg1: #05050a; --bg2: #0c0c14; --gold: #a78bfa; --gold-dark: #8b5cf6;
+      --card: rgba(167,139,250,0.07); --border: rgba(167,139,250,0.15);
+      --hand-bg: linear-gradient(165deg, #1a1525, #100e18);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; user-select:none; }
 
     body {
       font-family: 'Vazirmatn', 'Inter', Tahoma, sans-serif;
-      background: linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 50%, #16213e 100%);
+      background: linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 55%, #0d0d18 100%);
       min-height: 100vh;
       color: var(--text);
       display: flex;
@@ -38,471 +59,184 @@
       align-items: center;
       overflow-x: hidden;
       padding: 16px 14px 30px;
+      transition: background 0.4s ease;
     }
+    body.en { font-family: 'Inter', 'Vazirmatn', sans-serif; direction: ltr; }
 
-    body.en {
-      font-family: 'Inter', 'Vazirmatn', sans-serif;
-      direction: ltr;
-    }
-
-    .screen {
-      display: none;
-      width: 100%;
-      max-width: 400px;
-      flex-direction: column;
-      align-items: center;
-      animation: fadeIn 0.35s ease;
-    }
-    .screen.active {
-      display: flex;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .screen { display:none; width:100%; max-width:400px; flex-direction:column; align-items:center; animation:fadeIn 0.35s ease; }
+    .screen.active { display:flex; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 
     .logo {
-      font-size: 2.4rem;
-      font-weight: 700;
-      background: linear-gradient(90deg, #ffd700, #ffaa00);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 6px;
-      letter-spacing: -0.5px;
+      font-size: 2.3rem; font-weight:700;
+      background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      margin-bottom:6px;
     }
+    .subtitle { font-size:0.88rem; color:var(--text-muted); margin-bottom:24px; }
 
-    .subtitle {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 28px;
-    }
-
-    .stats-row {
-      display: flex;
-      gap: 12px;
-      width: 100%;
-      margin-bottom: 28px;
-    }
-
+    .stats-row { display:flex; gap:10px; width:100%; margin-bottom:24px; }
     .stat-card {
-      flex: 1;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px 10px;
-      text-align: center;
+      flex:1; background:var(--card); border:1px solid var(--border);
+      border-radius:14px; padding:12px 8px; text-align:center;
     }
-
-    .stat-card .num {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--gold);
-    }
-
-    .stat-card .lbl {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
+    .stat-card .num { font-size:1.4rem; font-weight:700; color:var(--gold); }
+    .stat-card .lbl { font-size:0.7rem; color:var(--text-muted); margin-top:2px; }
 
     .menu-btn {
-      width: 100%;
-      padding: 16px;
-      border-radius: 16px;
-      border: none;
-      font-family: inherit;
-      font-size: 1.05rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-bottom: 12px;
-      transition: transform 0.15s ease, opacity 0.15s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
+      width:100%; padding:15px; border-radius:15px; border:none;
+      font-family:inherit; font-size:1.02rem; font-weight:600; cursor:pointer;
+      margin-bottom:11px; transition:transform 0.15s; display:flex;
+      align-items:center; justify-content:center; gap:8px;
     }
+    .menu-btn:active { transform:scale(0.97); }
+    .menu-btn.primary { background:linear-gradient(135deg,var(--gold),var(--gold-dark)); color:#1a1a2e; }
+    .menu-btn.secondary { background:var(--card); color:var(--text); border:1px solid var(--border); }
+    .menu-btn.ghost { background:transparent; color:var(--text-muted); font-size:0.88rem; }
 
-    .menu-btn:active {
-      transform: scale(0.97);
-    }
-
-    .menu-btn.primary {
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: #1a1a2e;
-    }
-
-    .menu-btn.secondary {
-      background: var(--card);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .menu-btn.ghost {
-      background: transparent;
-      color: var(--text-muted);
-      border: 1px solid transparent;
-      font-size: 0.9rem;
-    }
-
-    .top-bar {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-
+    .top-bar { width:100%; display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
     .icon-btn {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--text);
-      font-size: 1.1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
+      width:40px; height:40px; border-radius:11px; background:var(--card);
+      border:1px solid var(--border); color:var(--text); font-size:1.05rem;
+      display:flex; align-items:center; justify-content:center; cursor:pointer;
     }
 
-    .score-board {
-      display: flex;
-      gap: 10px;
-      width: 100%;
-      margin-bottom: 18px;
-    }
-
+    .score-board { display:flex; gap:10px; width:100%; margin-bottom:12px; }
     .score-box {
-      flex: 1;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px;
-      text-align: center;
-      transition: border-color 0.3s;
+      flex:1; background:var(--card); border:1px solid var(--border);
+      border-radius:14px; padding:11px; text-align:center; transition:border-color 0.3s;
     }
+    .score-box.active-turn { border-color:var(--gold); box-shadow:0 0 12px color-mix(in srgb, var(--gold) 25%, transparent); }
+    .score-box .label { font-size:0.7rem; color:var(--text-muted); margin-bottom:2px; }
+    .score-box .value { font-size:1.5rem; font-weight:700; color:var(--gold); }
 
-    .score-box.active-turn {
-      border-color: var(--gold);
-      box-shadow: 0 0 12px rgba(255, 215, 0, 0.2);
+    .target-bar {
+      width:100%; height:6px; background:rgba(255,255,255,0.08);
+      border-radius:10px; margin-bottom:16px; overflow:hidden; display:flex;
     }
-
-    .score-box .label {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      margin-bottom: 2px;
-    }
-
-    .score-box .value {
-      font-size: 1.55rem;
-      font-weight: 700;
-      color: var(--gold);
-    }
+    .target-fill-1 { height:100%; background:var(--gold); transition:width 0.4s ease; }
+    .target-fill-2 { height:100%; background:var(--red); transition:width 0.4s ease; }
 
     .status {
-      width: 100%;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 12px 16px;
-      font-size: 0.95rem;
-      font-weight: 500;
-      text-align: center;
-      margin-bottom: 22px;
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width:100%; background:var(--card); border:1px solid var(--border);
+      border-radius:15px; padding:11px 15px; font-size:0.93rem; font-weight:500;
+      text-align:center; margin-bottom:20px; min-height:46px;
+      display:flex; align-items:center; justify-content:center;
     }
 
     .hands-container {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-bottom: 28px;
-      position: relative;
-      min-height: 160px;
+      display:flex; justify-content:center; gap:22px;
+      margin-bottom:24px; position:relative; min-height:155px;
     }
-
     .hand {
-      width: 125px;
-      height: 145px;
-      background: linear-gradient(165deg, #252545, #1a1a32);
-      border-radius: 22px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.34, 1.3, 0.64, 1);
-      border: 3px solid rgba(255,255,255,0.08);
-      position: relative;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+      width:120px; height:140px; background:var(--hand-bg);
+      border-radius:20px; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; cursor:pointer;
+      transition:all 0.25s cubic-bezier(0.34,1.3,0.64,1);
+      border:3px solid rgba(255,255,255,0.07);
+      position:relative; box-shadow:0 10px 26px rgba(0,0,0,0.4);
     }
-
-    .hand:active {
-      transform: scale(0.95);
-    }
-
+    .hand:active { transform:scale(0.95); }
     .hand.selected {
-      border-color: var(--gold);
-      box-shadow: 0 0 22px rgba(255, 215, 0, 0.35);
-      transform: translateY(-8px);
+      border-color:var(--gold); box-shadow:0 0 20px color-mix(in srgb, var(--gold) 35%, transparent);
+      transform:translateY(-7px);
     }
-
-    .hand.correct {
-      border-color: var(--green);
-      box-shadow: 0 0 24px rgba(0, 230, 118, 0.45);
-    }
-
-    .hand.wrong {
-      border-color: var(--red);
-      box-shadow: 0 0 24px rgba(255, 82, 82, 0.4);
-    }
-
-    .hand-icon {
-      font-size: 3rem;
-      margin-bottom: 6px;
-      transition: transform 0.3s;
-    }
-
-    .hand.selected .hand-icon {
-      transform: scale(1.12);
-    }
-
-    .hand-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
+    .hand.correct { border-color:var(--green); box-shadow:0 0 22px rgba(0,230,118,0.4); }
+    .hand.wrong { border-color:var(--red); box-shadow:0 0 22px rgba(255,82,82,0.35); }
+    .hand-icon { font-size:2.9rem; margin-bottom:5px; transition:transform 0.3s; }
+    .hand.selected .hand-icon { transform:scale(1.12); }
+    .hand-label { font-size:0.78rem; color:var(--text-muted); font-weight:500; }
 
     .flower {
-      position: absolute;
-      font-size: 2.1rem;
-      opacity: 0;
-      transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
-      pointer-events: none;
-      z-index: 10;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+      position:absolute; font-size:2rem; opacity:0;
+      transition:all 0.45s cubic-bezier(0.34,1.56,0.64,1);
+      pointer-events:none; z-index:10;
+      filter:drop-shadow(0 4px 8px rgba(0,0,0,0.4));
     }
+    .flower.visible { opacity:1; }
 
-    .flower.visible {
-      opacity: 1;
-    }
-
-    .controls {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 100%;
-    }
-
+    .controls { display:flex; flex-direction:column; gap:10px; width:100%; }
     .btn {
-      font-family: inherit;
-      border: none;
-      border-radius: 14px;
-      padding: 14px 18px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+      font-family:inherit; border:none; border-radius:14px; padding:13px 16px;
+      font-size:0.98rem; font-weight:600; cursor:pointer; transition:all 0.2s;
+      display:flex; align-items:center; justify-content:center; gap:7px;
     }
-
-    .btn:active {
-      transform: scale(0.97);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-      color: #1a1a2e;
-    }
-
-    .btn-secondary {
-      background: var(--card);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .btn-danger {
-      background: rgba(255, 82, 82, 0.15);
-      color: #ff8a80;
-      border: 1px solid rgba(255, 82, 82, 0.25);
-    }
-
-    .hidden {
-      display: none !important;
-    }
+    .btn:active { transform:scale(0.97); }
+    .btn-primary { background:linear-gradient(135deg,var(--gold),var(--gold-dark)); color:#1a1a2e; }
+    .btn-secondary { background:var(--card); color:var(--text); border:1px solid var(--border); }
+    .btn-danger { background:rgba(255,82,82,0.14); color:#ff8a80; border:1px solid rgba(255,82,82,0.22); }
+    .hidden { display:none !important; }
 
     .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.78);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-      padding: 20px;
+      position:fixed; inset:0; background:rgba(0,0,0,0.8);
+      display:flex; align-items:center; justify-content:center;
+      z-index:100; opacity:0; pointer-events:none; transition:opacity 0.3s; padding:18px;
     }
-
-    .overlay.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
+    .overlay.show { opacity:1; pointer-events:auto; }
     .modal {
-      background: linear-gradient(165deg, #22223a, #1a1a2e);
-      border-radius: 22px;
-      padding: 28px 24px;
-      text-align: center;
-      max-width: 320px;
-      width: 100%;
-      border: 1px solid var(--border);
-      transform: scale(0.92);
-      transition: transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+      background:linear-gradient(165deg, #1e1e32, #161625);
+      border-radius:20px; padding:26px 22px; text-align:center;
+      max-width:330px; width:100%; border:1px solid var(--border);
+      transform:scale(0.92); transition:transform 0.3s cubic-bezier(0.34,1.4,0.64,1);
+      max-height:85vh; overflow-y:auto;
     }
+    .overlay.show .modal { transform:scale(1); }
+    .modal-icon { font-size:3rem; margin-bottom:8px; }
+    .modal-title { font-size:1.3rem; font-weight:700; margin-bottom:6px; }
+    .modal-msg { font-size:0.9rem; color:var(--text-muted); margin-bottom:20px; line-height:1.5; }
 
-    .overlay.show .modal {
-      transform: scale(1);
-    }
-
-    .modal-icon {
-      font-size: 3.2rem;
-      margin-bottom: 10px;
-    }
-
-    .modal-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .modal-msg {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      margin-bottom: 22px;
-      line-height: 1.5;
-    }
-
-    .settings-group {
-      text-align: right;
-      margin-bottom: 18px;
-    }
-
-    body.en .settings-group {
-      text-align: left;
-    }
-
-    .settings-group label {
-      display: block;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .option-row {
-      display: flex;
-      gap: 8px;
-    }
-
+    .settings-group { text-align:right; margin-bottom:16px; }
+    body.en .settings-group { text-align:left; }
+    .settings-group label { display:block; font-size:0.82rem; color:var(--text-muted); margin-bottom:7px; }
+    .option-row { display:flex; gap:7px; flex-wrap:wrap; }
     .option-btn {
-      flex: 1;
-      padding: 10px 6px;
-      border-radius: 10px;
-      border: 2px solid var(--border);
-      background: transparent;
-      color: var(--text);
-      font-family: inherit;
-      font-size: 0.82rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
+      flex:1; min-width:70px; padding:9px 5px; border-radius:10px;
+      border:2px solid var(--border); background:transparent; color:var(--text);
+      font-family:inherit; font-size:0.78rem; font-weight:500; cursor:pointer; transition:all 0.2s;
     }
+    .option-btn.active { border-color:var(--gold); background:color-mix(in srgb, var(--gold) 12%, transparent); color:var(--gold); }
 
-    .option-btn.active {
-      border-color: var(--gold);
-      background: rgba(255, 215, 0, 0.12);
-      color: var(--gold);
-    }
-
-    .switching {
-      animation: switchAnim 0.55s ease;
-    }
-
+    .switching { animation:switchAnim 0.55s ease; }
     @keyframes switchAnim {
-      0% { transform: translateX(0); }
-      30% { transform: translateX(-12px) rotate(-4deg); }
-      60% { transform: translateX(12px) rotate(4deg); }
-      100% { transform: translateX(0); }
+      0%{transform:translateX(0)} 30%{transform:translateX(-12px) rotate(-4deg)}
+      60%{transform:translateX(12px) rotate(4deg)} 100%{transform:translateX(0)}
     }
 
-    .how-to {
-      text-align: right;
-      font-size: 0.9rem;
-      line-height: 1.7;
-      color: var(--text-muted);
-    }
-
-    body.en .how-to {
-      text-align: left;
-    }
-
-    .how-to li {
-      margin-bottom: 8px;
-    }
-
-    .footer {
-      margin-top: 24px;
-      font-size: 0.72rem;
-      color: rgba(255,255,255,0.35);
-      text-align: center;
-    }
+    .how-to { text-align:right; font-size:0.88rem; line-height:1.7; color:var(--text-muted); }
+    body.en .how-to { text-align:left; }
+    .how-to li { margin-bottom:7px; }
+    .footer { margin-top:22px; font-size:0.7rem; color:rgba(255,255,255,0.3); text-align:center; }
+    .match-progress { font-size:0.78rem; color:var(--text-muted); text-align:center; margin-bottom:8px; }
   </style>
 </head>
-<body>
-  <!-- HOME SCREEN -->
+<body class="theme-classic">
+  <!-- HOME -->
   <div class="screen active" id="homeScreen">
     <div class="logo" id="logoText">🌸 گل یا پوچ</div>
-    <div class="subtitle" id="subtitleText">نسخه آزمایشی حرفه‌ای</div>
+    <div class="subtitle" id="subtitleText">تا ۱۰ امتیاز • چند تم</div>
 
     <div class="stats-row">
-      <div class="stat-card">
-        <div class="num" id="statWins">0</div>
-        <div class="lbl" id="lblWins">بردها</div>
-      </div>
-      <div class="stat-card">
-        <div class="num" id="statStreak">0</div>
-        <div class="lbl" id="lblStreak">سری برد</div>
-      </div>
-      <div class="stat-card">
-        <div class="num" id="statBest">0</div>
-        <div class="lbl" id="lblBest">بهترین</div>
-      </div>
+      <div class="stat-card"><div class="num" id="statWins">0</div><div class="lbl" id="lblWins">بردها</div></div>
+      <div class="stat-card"><div class="num" id="statStreak">0</div><div class="lbl" id="lblStreak">سری برد</div></div>
+      <div class="stat-card"><div class="num" id="statBest">0</div><div class="lbl" id="lblBest">بهترین</div></div>
     </div>
 
     <button class="menu-btn primary" id="btnPlay">شروع بازی</button>
     <button class="menu-btn secondary" id="btnHowTo">چطور بازی کنیم؟</button>
     <button class="menu-btn secondary" id="btnSettings">تنظیمات</button>
     <button class="menu-btn ghost" id="btnLang">English</button>
-
-    <div class="footer">Gol ya Poch • Ready for GitHub</div>
+    <div class="footer">Gol ya Poch v2 • Sound + Themes</div>
   </div>
 
-  <!-- GAME SCREEN -->
+  <!-- GAME -->
   <div class="screen" id="gameScreen">
     <div class="top-bar">
       <button class="icon-btn" id="btnBack">←</button>
-      <div style="font-size:0.9rem;font-weight:600;" id="gameTitle">مقابل کامپیوتر</div>
+      <div style="font-size:0.88rem;font-weight:600;" id="gameTitle">مقابل کامپیوتر</div>
       <button class="icon-btn" id="btnGameSettings">⚙</button>
     </div>
+
+    <div class="match-progress" id="matchProgress">اولین بازیکن به ۱۰ امتیاز برنده است</div>
 
     <div class="score-board">
       <div class="score-box" id="box1">
@@ -513,6 +247,11 @@
         <div class="label" id="label2">کامپیوتر</div>
         <div class="value" id="score2">0</div>
       </div>
+    </div>
+
+    <div class="target-bar">
+      <div class="target-fill-1" id="fill1" style="width:0%"></div>
+      <div class="target-fill-2" id="fill2" style="width:0%"></div>
     </div>
 
     <div class="status" id="status">—</div>
@@ -536,7 +275,7 @@
     </div>
   </div>
 
-  <!-- RESULT OVERLAY -->
+  <!-- RESULT -->
   <div class="overlay" id="resultOverlay">
     <div class="modal">
       <div class="modal-icon" id="resultIcon">🎉</div>
@@ -546,10 +285,34 @@
     </div>
   </div>
 
-  <!-- SETTINGS OVERLAY -->
+  <!-- MATCH OVER -->
+  <div class="overlay" id="matchOverlay">
+    <div class="modal">
+      <div class="modal-icon" id="matchIcon">🏆</div>
+      <div class="modal-title" id="matchTitle">برنده شدی!</div>
+      <div class="modal-msg" id="matchMessage">به ۱۰ امتیاز رسیدی</div>
+      <button class="btn btn-primary" id="btnNewMatch" style="width:100%;margin-bottom:8px;">بازی جدید</button>
+      <button class="btn btn-secondary" id="btnBackHome" style="width:100%;">صفحه اصلی</button>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
   <div class="overlay" id="settingsOverlay">
     <div class="modal" style="text-align:right;">
-      <div class="modal-title" id="settingsTitle" style="text-align:center;margin-bottom:20px;">تنظیمات</div>
+      <div class="modal-title" id="settingsTitle" style="text-align:center;margin-bottom:18px;">تنظیمات</div>
+
+      <div class="settings-group">
+        <label id="lblTheme">تم / زمین</label>
+        <div class="option-row" style="margin-bottom:4px;">
+          <button class="option-btn active" data-theme="classic" id="thClassic">کلاسیک</button>
+          <button class="option-btn" data-theme="traditional" id="thTrad">سنتی</button>
+          <button class="option-btn" data-theme="neon" id="thNeon">نئون</button>
+        </div>
+        <div class="option-row">
+          <button class="option-btn" data-theme="cafe" id="thCafe">قهوه‌خانه</button>
+          <button class="option-btn" data-theme="night" id="thNight">شب</button>
+        </div>
+      </div>
 
       <div class="settings-group">
         <label id="lblDifficulty">سطح سختی</label>
@@ -568,21 +331,31 @@
         </div>
       </div>
 
-      <button class="btn btn-primary" id="btnCloseSettings" style="width:100%;margin-top:10px;">بستن</button>
+      <div class="settings-group">
+        <label id="lblSound">صدا</label>
+        <div class="option-row">
+          <button class="option-btn active" data-sound="on" id="soundOn">روشن</button>
+          <button class="option-btn" data-sound="off" id="soundOff">خاموش</button>
+        </div>
+      </div>
+
+      <div class="settings-group">
+        <label id="lblVibrate">ویبره</label>
+        <div class="option-row">
+          <button class="option-btn active" data-vib="on" id="vibOn">روشن</button>
+          <button class="option-btn" data-vib="off" id="vibOff">خاموش</button>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="btnCloseSettings" style="width:100%;margin-top:8px;">بستن</button>
     </div>
   </div>
 
-  <!-- HOW TO PLAY -->
+  <!-- HOW TO -->
   <div class="overlay" id="howtoOverlay">
     <div class="modal">
       <div class="modal-title" id="howtoTitle">چطور بازی کنیم؟</div>
-      <ol class="how-to" id="howtoList" style="margin:16px 0 22px;padding-right:18px;">
-        <li>یکی از بازیکن‌ها گل را در یکی از دست‌هایش مخفی می‌کند.</li>
-        <li>می‌تواند چند بار گل را بین دست‌ها جابه‌جا کند.</li>
-        <li>بازیکن مقابل باید حدس بزند گل در کدام دست است.</li>
-        <li>اگر درست حدس بزند، نوبت مخفی کردن به او می‌رسد.</li>
-        <li>اگر اشتباه حدس بزند، مخفی‌کننده امتیاز می‌گیرد.</li>
-      </ol>
+      <ol class="how-to" id="howtoList" style="margin:14px 0 20px;padding-right:18px;"></ol>
       <button class="btn btn-primary" id="btnCloseHowto" style="width:100%">متوجه شدم</button>
     </div>
   </div>
@@ -590,149 +363,136 @@
   <script>
     const i18n = {
       fa: {
-        logo: "🌸 گل یا پوچ",
-        subtitle: "نسخه آزمایشی حرفه‌ای",
-        wins: "بردها",
-        streak: "سری برد",
-        best: "بهترین",
-        play: "شروع بازی",
-        howto: "چطور بازی کنیم؟",
-        settings: "تنظیمات",
-        langBtn: "English",
-        you: "شما",
-        computer: "کامپیوتر",
-        player1: "بازیکن ۱",
-        player2: "بازیکن ۲",
-        left: "دست چپ",
-        right: "دست راست",
-        ready: "آماده ✓",
-        switch: "جابه‌جایی گل 🔄",
-        quit: "خروج از بازی",
-        next: "دور بعد",
-        settingsTitle: "تنظیمات",
-        difficulty: "سطح سختی",
-        easy: "آسان",
-        medium: "متوسط",
-        hard: "سخت",
-        mode: "حالت بازی",
-        vsAi: "مقابل کامپیوتر",
-        local: "دو نفره",
-        close: "بستن",
-        howtoTitle: "چطور بازی کنیم؟",
-        howtoItems: [
+        logo:"🌸 گل یا پوچ", subtitle:"تا ۱۰ امتیاز • چند تم",
+        wins:"بردها", streak:"سری برد", best:"بهترین",
+        play:"شروع بازی", howto:"چطور بازی کنیم؟", settings:"تنظیمات", langBtn:"English",
+        you:"شما", computer:"کامپیوتر", player1:"بازیکن ۱", player2:"بازیکن ۲",
+        left:"دست چپ", right:"دست راست", ready:"آماده ✓", switch:"جابه‌جایی گل 🔄",
+        quit:"خروج از بازی", next:"دور بعد", settingsTitle:"تنظیمات",
+        difficulty:"سطح سختی", easy:"آسان", medium:"متوسط", hard:"سخت",
+        mode:"حالت بازی", vsAi:"مقابل کامپیوتر", local:"دو نفره", close:"بستن",
+        howtoTitle:"چطور بازی کنیم؟",
+        howtoItems:[
           "یکی از بازیکن‌ها گل را در یکی از دست‌هایش مخفی می‌کند.",
           "می‌تواند چند بار گل را بین دست‌ها جابه‌جا کند.",
-          "بازیکن مقابل باید حدس بزند گل در کدام دست است.",
+          "حریف باید حدس بزند گل در کدام دست است.",
           "اگر درست حدس بزند، نوبت مخفی کردن به او می‌رسد.",
-          "اگر اشتباه حدس بزند، مخفی‌کننده امتیاز می‌گیرد."
+          "اولین نفری که به ۱۰ امتیاز برسد برنده مسابقه است."
         ],
-        gotIt: "متوجه شدم",
-        hideNow: "گل را در یکی از دست‌ها مخفی کن",
-        hiddenReady: "گل مخفی شد! حالا دکمه «آماده» را بزن",
-        switched: "گل جابه‌جا شد!",
-        aiThinking: "کامپیوتر در حال حدس زدن...",
-        aiHiding: "کامپیوتر داره گل رو مخفی می‌کنه...",
-        yourGuess: "حدس بزن گل کدوم دسته!",
-        p1Hide: "بازیکن ۱: گل را مخفی کن",
-        p2Hide: "بازیکن ۲: گل را مخفی کن",
-        p1Guess: "بازیکن ۱: حدس بزن",
-        p2Guess: "بازیکن ۲: حدس بزن",
-        aiCorrect: "کامپیوتر درست حدس زد!",
-        youBluffed: "آفرین! گولش زدی",
-        youCorrect: "دمت گرم! درست حدس زدی",
-        youWrong: "اشتباه حدس زدی!",
-        pGuessCorrect: "درست حدس زد!",
-        pBluffed: "برنده شد!",
-        flowerWas: "گل تو دست {hand} بود",
-        leftHand: "چپ",
-        rightHand: "راست",
-        vsComputer: "مقابل کامپیوتر",
-        localMatch: "بازی دو نفره"
+        gotIt:"متوجه شدم",
+        hideNow:"گل را در یکی از دست‌ها مخفی کن",
+        hiddenReady:"گل مخفی شد! حالا دکمه «آماده» را بزن",
+        switched:"گل جابه‌جا شد!",
+        aiThinking:"کامپیوتر در حال حدس زدن...",
+        aiHiding:"کامپیوتر داره گل رو مخفی می‌کنه...",
+        yourGuess:"حدس بزن گل کدوم دسته!",
+        p1Hide:"بازیکن ۱: گل را مخفی کن", p2Hide:"بازیکن ۲: گل را مخفی کن",
+        p1Guess:"بازیکن ۱: حدس بزن", p2Guess:"بازیکن ۲: حدس بزن",
+        aiCorrect:"کامپیوتر درست حدس زد!", youBluffed:"آفرین! گولش زدی",
+        youCorrect:"دمت گرم! درست حدس زدی", youWrong:"اشتباه حدس زدی!",
+        pGuessCorrect:"درست حدس زد!", pBluffed:"برنده شد!",
+        flowerWas:"گل تو دست {hand} بود", leftHand:"چپ", rightHand:"راست",
+        vsComputer:"مقابل کامپیوتر", localMatch:"بازی دو نفره",
+        matchProgress:"اولین بازیکن به ۱۰ امتیاز برنده است",
+        theme:"تم / زمین", classic:"کلاسیک", traditional:"سنتی", neon:"نئون", cafe:"قهوه‌خانه", night:"شب",
+        sound:"صدا", vibrate:"ویبره", on:"روشن", off:"خاموش",
+        youWinMatch:"برنده شدی! 🏆", aiWinMatch:"کامپیوتر برنده شد",
+        p1WinMatch:"بازیکن ۱ برنده شد!", p2WinMatch:"بازیکن ۲ برنده شد!",
+        reach10:"به ۱۰ امتیاز رسیدی", newMatch:"بازی جدید", backHome:"صفحه اصلی"
       },
       en: {
-        logo: "🌸 Gol ya Poch",
-        subtitle: "Professional Web Demo",
-        wins: "Wins",
-        streak: "Streak",
-        best: "Best",
-        play: "Play",
-        howto: "How to Play",
-        settings: "Settings",
-        langBtn: "فارسی",
-        you: "You",
-        computer: "Computer",
-        player1: "Player 1",
-        player2: "Player 2",
-        left: "Left Hand",
-        right: "Right Hand",
-        ready: "Ready ✓",
-        switch: "Switch Flower 🔄",
-        quit: "Quit Game",
-        next: "Next Round",
-        settingsTitle: "Settings",
-        difficulty: "Difficulty",
-        easy: "Easy",
-        medium: "Medium",
-        hard: "Hard",
-        mode: "Game Mode",
-        vsAi: "vs Computer",
-        local: "2 Players",
-        close: "Close",
-        howtoTitle: "How to Play",
-        howtoItems: [
-          "One player hides the flower in one of their hands.",
-          "They can switch the flower between hands several times.",
-          "The opponent must guess which hand holds the flower.",
-          "If they guess correctly, they become the next hider.",
-          "If they guess wrong, the hider scores a point."
+        logo:"🌸 Gol ya Poch", subtitle:"First to 10 • Multiple Themes",
+        wins:"Wins", streak:"Streak", best:"Best",
+        play:"Play", howto:"How to Play", settings:"Settings", langBtn:"فارسی",
+        you:"You", computer:"Computer", player1:"Player 1", player2:"Player 2",
+        left:"Left Hand", right:"Right Hand", ready:"Ready ✓", switch:"Switch Flower 🔄",
+        quit:"Quit Game", next:"Next Round", settingsTitle:"Settings",
+        difficulty:"Difficulty", easy:"Easy", medium:"Medium", hard:"Hard",
+        mode:"Game Mode", vsAi:"vs Computer", local:"2 Players", close:"Close",
+        howtoTitle:"How to Play",
+        howtoItems:[
+          "One player hides the flower in one hand.",
+          "They can switch it between hands several times.",
+          "The opponent must guess which hand has it.",
+          "Correct guess → they become the next hider.",
+          "First to reach 10 points wins the match."
         ],
-        gotIt: "Got it",
-        hideNow: "Hide the flower in one hand",
-        hiddenReady: "Flower hidden! Press Ready",
-        switched: "Flower switched!",
-        aiThinking: "Computer is guessing...",
-        aiHiding: "Computer is hiding the flower...",
-        yourGuess: "Guess which hand has the flower!",
-        p1Hide: "Player 1: Hide the flower",
-        p2Hide: "Player 2: Hide the flower",
-        p1Guess: "Player 1: Make your guess",
-        p2Guess: "Player 2: Make your guess",
-        aiCorrect: "Computer guessed right!",
-        youBluffed: "Nice bluff! You got them",
-        youCorrect: "Correct guess!",
-        youWrong: "Wrong guess!",
-        pGuessCorrect: "guessed correctly!",
-        pBluffed: "wins the round!",
-        flowerWas: "Flower was in the {hand} hand",
-        leftHand: "left",
-        rightHand: "right",
-        vsComputer: "vs Computer",
-        localMatch: "Local Match"
+        gotIt:"Got it",
+        hideNow:"Hide the flower in one hand",
+        hiddenReady:"Flower hidden! Press Ready",
+        switched:"Flower switched!",
+        aiThinking:"Computer is guessing...",
+        aiHiding:"Computer is hiding the flower...",
+        yourGuess:"Guess which hand has the flower!",
+        p1Hide:"Player 1: Hide the flower", p2Hide:"Player 2: Hide the flower",
+        p1Guess:"Player 1: Make your guess", p2Guess:"Player 2: Make your guess",
+        aiCorrect:"Computer guessed right!", youBluffed:"Nice bluff!",
+        youCorrect:"Correct guess!", youWrong:"Wrong guess!",
+        pGuessCorrect:"guessed correctly!", pBluffed:"wins the round!",
+        flowerWas:"Flower was in the {hand} hand", leftHand:"left", rightHand:"right",
+        vsComputer:"vs Computer", localMatch:"Local Match",
+        matchProgress:"First to 10 points wins",
+        theme:"Theme / Arena", classic:"Classic", traditional:"Traditional", neon:"Neon", cafe:"Cafe", night:"Night",
+        sound:"Sound", vibrate:"Vibration", on:"On", off:"Off",
+        youWinMatch:"You Win! 🏆", aiWinMatch:"Computer Wins",
+        p1WinMatch:"Player 1 Wins!", p2WinMatch:"Player 2 Wins!",
+        reach10:"Reached 10 points", newMatch:"New Match", backHome:"Home"
       }
     };
 
     let lang = localStorage.getItem('gyp_lang') || 'fa';
     let difficulty = localStorage.getItem('gyp_diff') || 'medium';
+    let theme = localStorage.getItem('gyp_theme') || 'classic';
+    let soundOn = localStorage.getItem('gyp_sound') !== 'off';
+    let vibOn = localStorage.getItem('gyp_vib') !== 'off';
     let mode = 'ai';
     let phase = 'idle';
     let currentHider = 1;
     let flowerHand = null;
-    let score1 = 0;
-    let score2 = 0;
+    let score1 = 0, score2 = 0;
     let selectedGuess = null;
     let isSwitching = false;
+    const TARGET = 10;
 
-    let totalWins = parseInt(localStorage.getItem('gyp_wins') || '0');
-    let currentStreak = parseInt(localStorage.getItem('gyp_streak') || '0');
-    let bestStreak = parseInt(localStorage.getItem('gyp_best') || '0');
+    let totalWins = +localStorage.getItem('gyp_wins') || 0;
+    let currentStreak = +localStorage.getItem('gyp_streak') || 0;
+    let bestStreak = +localStorage.getItem('gyp_best') || 0;
 
     const $ = id => document.getElementById(id);
     const t = key => i18n[lang][key];
 
+    let audioCtx = null;
+    function ensureAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    function playTone(freq, duration, type='sine', gain=0.08) {
+      if (!soundOn) return;
+      try {
+        ensureAudio();
+        const osc = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.value = freq;
+        g.gain.setValueAtTime(gain, audioCtx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(g); g.connect(audioCtx.destination);
+        osc.start(); osc.stop(audioCtx.currentTime + duration);
+      } catch(e) {}
+    }
+    function sfxClick() { playTone(600, 0.06, 'square', 0.04); }
+    function sfxSwitch() { playTone(400, 0.08); setTimeout(()=>playTone(500,0.08),70); }
+    function sfxCorrect() { playTone(520,0.1); setTimeout(()=>playTone(660,0.12),90); setTimeout(()=>playTone(780,0.15),180); }
+    function sfxWrong() { playTone(300,0.15,'sawtooth',0.06); setTimeout(()=>playTone(220,0.2,'sawtooth',0.05),120); }
+    function sfxWin() { playTone(523,0.12); setTimeout(()=>playTone(659,0.12),100); setTimeout(()=>playTone(784,0.2),200); }
+
+    function vibrate(pattern=[40]) {
+      if (vibOn && navigator.vibrate) navigator.vibrate(pattern);
+    }
+
     function applyLanguage() {
-      document.body.classList.toggle('en', lang === 'en');
+      document.body.classList.toggle('en', lang==='en');
       document.documentElement.lang = lang;
-      document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+      document.documentElement.dir = lang==='fa' ? 'rtl' : 'ltr';
 
       $('logoText').textContent = t('logo');
       $('subtitleText').textContent = t('subtitle');
@@ -760,6 +520,21 @@
       $('btnCloseSettings').textContent = t('close');
       $('howtoTitle').textContent = t('howtoTitle');
       $('btnCloseHowto').textContent = t('gotIt');
+      $('lblTheme').textContent = t('theme');
+      $('thClassic').textContent = t('classic');
+      $('thTrad').textContent = t('traditional');
+      $('thNeon').textContent = t('neon');
+      $('thCafe').textContent = t('cafe');
+      $('thNight').textContent = t('night');
+      $('lblSound').textContent = t('sound');
+      $('soundOn').textContent = t('on');
+      $('soundOff').textContent = t('off');
+      $('lblVibrate').textContent = t('vibrate');
+      $('vibOn').textContent = t('on');
+      $('vibOff').textContent = t('off');
+      $('matchProgress').textContent = t('matchProgress');
+      $('btnNewMatch').textContent = t('newMatch');
+      $('btnBackHome').textContent = t('backHome');
 
       const list = $('howtoList');
       list.innerHTML = '';
@@ -774,8 +549,14 @@
       updateStatsDisplay();
     }
 
+    function applyTheme() {
+      document.body.className = document.body.className.replace(/theme-\w+/g, '');
+      document.body.classList.add('theme-' + theme);
+      if (lang==='en') document.body.classList.add('en');
+    }
+
     function updateLabels() {
-      if (mode === 'ai') {
+      if (mode==='ai') {
         $('label1').textContent = t('you');
         $('label2').textContent = t('computer');
       } else {
@@ -783,66 +564,59 @@
         $('label2').textContent = t('player2');
       }
     }
-
     function updateGameTitle() {
-      $('gameTitle').textContent = mode === 'ai' ? t('vsComputer') : t('localMatch');
+      $('gameTitle').textContent = mode==='ai' ? t('vsComputer') : t('localMatch');
     }
-
     function updateStatsDisplay() {
       $('statWins').textContent = totalWins;
       $('statStreak').textContent = currentStreak;
       $('statBest').textContent = bestStreak;
     }
-
-    function setStatus(text) {
-      $('status').textContent = text;
+    function updateScoreBar() {
+      const p1 = Math.min(score1 / TARGET * 50, 50);
+      const p2 = Math.min(score2 / TARGET * 50, 50);
+      $('fill1').style.width = p1 + '%';
+      $('fill2').style.width = p2 + '%';
     }
 
+    function setStatus(txt) { $('status').textContent = txt; }
     function clearHandStates() {
-      $('handLeft').classList.remove('selected', 'correct', 'wrong');
-      $('handRight').classList.remove('selected', 'correct', 'wrong');
+      $('handLeft').classList.remove('selected','correct','wrong');
+      $('handRight').classList.remove('selected','correct','wrong');
     }
-
     function showFlowerInHand(hand) {
-      const target = hand === 'left' ? $('handLeft') : $('handRight');
+      const target = hand==='left' ? $('handLeft') : $('handRight');
       const rect = target.getBoundingClientRect();
-      const containerRect = $('handsContainer').getBoundingClientRect();
-      const flower = $('flower');
-      flower.style.left = (rect.left - containerRect.left + rect.width / 2 - 16) + 'px';
-      flower.style.top = (rect.top - containerRect.top + 22) + 'px';
-      flower.classList.add('visible');
+      const cRect = $('handsContainer').getBoundingClientRect();
+      const f = $('flower');
+      f.style.left = (rect.left - cRect.left + rect.width/2 - 15) + 'px';
+      f.style.top = (rect.top - cRect.top + 20) + 'px';
+      f.classList.add('visible');
     }
-
-    function hideFlower() {
-      $('flower').classList.remove('visible');
+    function hideFlower() { $('flower').classList.remove('visible'); }
+    function enableHands(v) {
+      $('handLeft').style.pointerEvents = v ? 'auto' : 'none';
+      $('handRight').style.pointerEvents = v ? 'auto' : 'none';
     }
-
-    function enableHands(enable) {
-      $('handLeft').style.pointerEvents = enable ? 'auto' : 'none';
-      $('handRight').style.pointerEvents = enable ? 'auto' : 'none';
-    }
-
     function highlightTurn() {
-      $('box1').classList.toggle('active-turn', currentHider === 1);
-      $('box2').classList.toggle('active-turn', currentHider === 2);
+      $('box1').classList.toggle('active-turn', currentHider===1);
+      $('box2').classList.toggle('active-turn', currentHider===2);
     }
-
     function getAiAccuracy() {
-      if (difficulty === 'easy') return 0.32;
-      if (difficulty === 'hard') return 0.62;
-      return 0.45;
+      if (difficulty==='easy') return 0.30;
+      if (difficulty==='hard') return 0.60;
+      return 0.44;
     }
-
     function showScreen(id) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       $(id).classList.add('active');
     }
 
     function startGame() {
-      score1 = 0;
-      score2 = 0;
+      score1 = 0; score2 = 0;
       $('score1').textContent = '0';
       $('score2').textContent = '0';
+      updateScoreBar();
       currentHider = 1;
       phase = 'hiding';
       flowerHand = null;
@@ -855,8 +629,9 @@
       updateLabels();
       updateGameTitle();
       highlightTurn();
+      sfxClick();
 
-      if (mode === 'ai') {
+      if (mode==='ai') {
         setStatus(t('hideNow'));
         enableHands(true);
       } else {
@@ -866,23 +641,26 @@
     }
 
     function onHandClick(hand) {
-      if (phase === 'hiding' && currentHider === 1) {
+      if (phase==='hiding' && currentHider===1) {
         flowerHand = hand;
         clearHandStates();
-        $(hand === 'left' ? 'handLeft' : 'handRight').classList.add('selected');
-        const el = $(hand === 'left' ? 'handLeft' : 'handRight');
+        $(hand==='left'?'handLeft':'handRight').classList.add('selected');
+        const el = $(hand==='left'?'handLeft':'handRight');
         el.classList.add('switching');
-        setTimeout(() => el.classList.remove('switching'), 550);
+        setTimeout(()=>el.classList.remove('switching'),550);
+        sfxSwitch();
+        vibrate(30);
 
         setStatus(t('hiddenReady'));
         $('mainBtn').classList.remove('hidden');
         $('switchBtn').classList.remove('hidden');
         enableHands(false);
-      } else if (phase === 'guessing') {
+      } else if (phase==='guessing') {
         selectedGuess = hand;
         clearHandStates();
-        $(hand === 'left' ? 'handLeft' : 'handRight').classList.add('selected');
-        setTimeout(() => reveal(), 380);
+        $(hand==='left'?'handLeft':'handRight').classList.add('selected');
+        sfxClick();
+        setTimeout(()=>reveal(), 360);
       }
     }
 
@@ -893,35 +671,35 @@
       phase = 'guessing';
       $('mainBtn').classList.add('hidden');
       $('switchBtn').classList.add('hidden');
+      sfxClick();
 
-      if (mode === 'ai' && currentHider === 1) {
+      if (mode==='ai' && currentHider===1) {
         setStatus(t('aiThinking'));
         enableHands(false);
-        setTimeout(() => {
+        setTimeout(()=>{
           const correct = Math.random() < getAiAccuracy();
-          selectedGuess = correct ? flowerHand : (flowerHand === 'left' ? 'right' : 'left');
+          selectedGuess = correct ? flowerHand : (flowerHand==='left'?'right':'left');
           clearHandStates();
-          $(selectedGuess === 'left' ? 'handLeft' : 'handRight').classList.add('selected');
-          setTimeout(() => reveal(), 550);
-        }, 1000 + Math.random() * 600);
+          $(selectedGuess==='left'?'handLeft':'handRight').classList.add('selected');
+          setTimeout(()=>reveal(), 500);
+        }, 900 + Math.random()*500);
       } else {
-        const guesser = currentHider === 1 ? 2 : 1;
-        setStatus(guesser === 1 ? t('p1Guess') : t('p2Guess'));
+        const guesser = currentHider===1 ? 2 : 1;
+        setStatus(guesser===1 ? t('p1Guess') : t('p2Guess'));
         enableHands(true);
       }
     }
 
     function switchFlower() {
-      if (phase !== 'hiding' || !flowerHand || isSwitching || currentHider !== 1) return;
+      if (phase!=='hiding' || !flowerHand || isSwitching || currentHider!==1) return;
       isSwitching = true;
-      flowerHand = flowerHand === 'left' ? 'right' : 'left';
+      flowerHand = flowerHand==='left' ? 'right' : 'left';
       clearHandStates();
-      const el = $(flowerHand === 'left' ? 'handLeft' : 'handRight');
-      el.classList.add('selected', 'switching');
-      setTimeout(() => {
-        el.classList.remove('switching');
-        isSwitching = false;
-      }, 550);
+      const el = $(flowerHand==='left'?'handLeft':'handRight');
+      el.classList.add('selected','switching');
+      sfxSwitch();
+      vibrate(25);
+      setTimeout(()=>{ el.classList.remove('switching'); isSwitching=false; },550);
       setStatus(t('switched'));
     }
 
@@ -935,25 +713,24 @@
       highlightTurn();
 
       let count = 0;
-      const max = 3 + Math.floor(Math.random() * 3);
-
+      const max = 3 + Math.floor(Math.random()*3);
       const doSwitch = () => {
-        const el = Math.random() < 0.5 ? $('handLeft') : $('handRight');
+        const el = Math.random()<0.5 ? $('handLeft') : $('handRight');
         el.classList.add('switching');
-        setTimeout(() => el.classList.remove('switching'), 420);
+        sfxSwitch();
+        setTimeout(()=>el.classList.remove('switching'),400);
         count++;
-        if (count < max) {
-          setTimeout(doSwitch, 480);
-        } else {
-          flowerHand = Math.random() < 0.5 ? 'left' : 'right';
-          setTimeout(() => {
+        if (count < max) setTimeout(doSwitch, 460);
+        else {
+          flowerHand = Math.random()<0.5 ? 'left' : 'right';
+          setTimeout(()=>{
             phase = 'guessing';
             setStatus(t('yourGuess'));
             enableHands(true);
-          }, 500);
+          }, 480);
         }
       };
-      setTimeout(doSwitch, 350);
+      setTimeout(doSwitch, 320);
     }
 
     function reveal() {
@@ -961,72 +738,91 @@
       enableHands(false);
       showFlowerInHand(flowerHand);
 
-      const correctEl = $(flowerHand === 'left' ? 'handLeft' : 'handRight');
-      const wrongEl = $(flowerHand === 'left' ? 'handRight' : 'handLeft');
+      const correctEl = $(flowerHand==='left'?'handLeft':'handRight');
+      const wrongEl = $(flowerHand==='left'?'handRight':'handLeft');
       correctEl.classList.add('correct');
       if (selectedGuess !== flowerHand) wrongEl.classList.add('wrong');
 
       const isCorrect = selectedGuess === flowerHand;
       let title, msg, icon;
-      const handName = flowerHand === 'left' ? t('leftHand') : t('rightHand');
+      const handName = flowerHand==='left' ? t('leftHand') : t('rightHand');
       msg = t('flowerWas').replace('{hand}', handName);
 
-      if (mode === 'ai') {
-        if (currentHider === 1) {
+      if (mode==='ai') {
+        if (currentHider===1) {
           if (isCorrect) {
-            score2++;
-            title = t('aiCorrect');
-            icon = '🤖';
-            currentHider = 2;
-            currentStreak = 0;
+            score2++; title = t('aiCorrect'); icon = '🤖';
+            currentHider = 2; currentStreak = 0;
+            sfxWrong(); vibrate([40,30,40]);
           } else {
-            score1++;
-            title = t('youBluffed');
-            icon = '🎉';
-            currentHider = 1;
-            totalWins++;
-            currentStreak++;
+            score1++; title = t('youBluffed'); icon = '🎉';
+            currentHider = 1; totalWins++; currentStreak++;
             if (currentStreak > bestStreak) bestStreak = currentStreak;
+            sfxCorrect(); vibrate([20,40,20]);
           }
         } else {
           if (isCorrect) {
-            score1++;
-            title = t('youCorrect');
-            icon = '🔥';
-            currentHider = 1;
-            totalWins++;
-            currentStreak++;
+            score1++; title = t('youCorrect'); icon = '🔥';
+            currentHider = 1; totalWins++; currentStreak++;
             if (currentStreak > bestStreak) bestStreak = currentStreak;
+            sfxCorrect(); vibrate([20,40,20]);
           } else {
-            score2++;
-            title = t('youWrong');
-            icon = '😈';
-            currentHider = 2;
-            currentStreak = 0;
+            score2++; title = t('youWrong'); icon = '😈';
+            currentHider = 2; currentStreak = 0;
+            sfxWrong(); vibrate([50,30,50]);
           }
         }
         saveStats();
       } else {
-        const guesser = currentHider === 1 ? 2 : 1;
+        const guesser = currentHider===1 ? 2 : 1;
         if (isCorrect) {
-          if (guesser === 1) score1++; else score2++;
-          title = `${guesser === 1 ? t('player1') : t('player2')} ${t('pGuessCorrect')}`;
-          icon = '🎯';
-          currentHider = guesser;
+          if (guesser===1) score1++; else score2++;
+          title = `${guesser===1?t('player1'):t('player2')} ${t('pGuessCorrect')}`;
+          icon = '🎯'; currentHider = guesser;
+          sfxCorrect();
         } else {
-          if (currentHider === 1) score1++; else score2++;
-          title = `${currentHider === 1 ? t('player1') : t('player2')} ${t('pBluffed')}`;
+          if (currentHider===1) score1++; else score2++;
+          title = `${currentHider===1?t('player1'):t('player2')} ${t('pBluffed')}`;
           icon = '🎭';
+          sfxWrong();
         }
       }
 
       $('score1').textContent = score1;
       $('score2').textContent = score2;
+      updateScoreBar();
       $('resultIcon').textContent = icon;
       $('resultTitle').textContent = title;
       $('resultMessage').textContent = msg;
 
-      setTimeout(() => $('resultOverlay').classList.add('show'), 650);
+      setTimeout(() => {
+        if (score1 >= TARGET || score2 >= TARGET) {
+          showMatchOver();
+        } else {
+          $('resultOverlay').classList.add('show');
+        }
+      }, 600);
+    }
+
+    function showMatchOver() {
+      let title, icon;
+      if (mode==='ai') {
+        if (score1 >= TARGET) {
+          title = t('youWinMatch'); icon = '🏆';
+          sfxWin(); vibrate([30,50,30,50,80]);
+        } else {
+          title = t('aiWinMatch'); icon = '🤖';
+          sfxWrong();
+        }
+      } else {
+        if (score1 >= TARGET) { title = t('p1WinMatch'); icon = '🏆'; }
+        else { title = t('p2WinMatch'); icon = '🏆'; }
+        sfxWin();
+      }
+      $('matchIcon').textContent = icon;
+      $('matchTitle').textContent = title;
+      $('matchMessage').textContent = t('reach10');
+      $('matchOverlay').classList.add('show');
     }
 
     function nextRound() {
@@ -1039,8 +835,8 @@
       $('switchBtn').classList.add('hidden');
       highlightTurn();
 
-      if (mode === 'ai') {
-        if (currentHider === 1) {
+      if (mode==='ai') {
+        if (currentHider===1) {
           phase = 'hiding';
           setStatus(t('hideNow'));
           enableHands(true);
@@ -1049,7 +845,7 @@
         }
       } else {
         phase = 'hiding';
-        setStatus(currentHider === 1 ? t('p1Hide') : t('p2Hide'));
+        setStatus(currentHider===1 ? t('p1Hide') : t('p2Hide'));
         enableHands(true);
       }
     }
@@ -1061,31 +857,31 @@
       updateStatsDisplay();
     }
 
-    $('btnPlay').onclick = startGame;
-    $('btnBack').onclick = () => {
-      showScreen('homeScreen');
-      updateStatsDisplay();
-    };
-    $('btnQuit').onclick = () => {
+    $('btnPlay').onclick = () => { sfxClick(); startGame(); };
+    $('btnBack').onclick = () => { sfxClick(); showScreen('homeScreen'); updateStatsDisplay(); };
+    $('btnQuit').onclick = () => { sfxClick(); showScreen('homeScreen'); updateStatsDisplay(); };
+    $('btnNewMatch').onclick = () => { $('matchOverlay').classList.remove('show'); startGame(); };
+    $('btnBackHome').onclick = () => {
+      $('matchOverlay').classList.remove('show');
       showScreen('homeScreen');
       updateStatsDisplay();
     };
 
-    $('btnHowTo').onclick = () => $('howtoOverlay').classList.add('show');
-    $('btnCloseHowto').onclick = () => $('howtoOverlay').classList.remove('show');
+    $('btnHowTo').onclick = () => { sfxClick(); $('howtoOverlay').classList.add('show'); };
+    $('btnCloseHowto').onclick = () => { sfxClick(); $('howtoOverlay').classList.remove('show'); };
 
     $('btnSettings').onclick = openSettings;
     $('btnGameSettings').onclick = openSettings;
-    $('btnCloseSettings').onclick = () => $('settingsOverlay').classList.remove('show');
+    $('btnCloseSettings').onclick = () => { sfxClick(); $('settingsOverlay').classList.remove('show'); };
 
     function openSettings() {
-      document.querySelectorAll('[data-diff]').forEach(b => {
-        b.classList.toggle('active', b.dataset.diff === difficulty);
-      });
-      document.querySelectorAll('[data-mode]').forEach(b => {
-        b.classList.toggle('active', b.dataset.mode === mode);
-      });
+      document.querySelectorAll('[data-diff]').forEach(b => b.classList.toggle('active', b.dataset.diff===difficulty));
+      document.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('active', b.dataset.mode===mode));
+      document.querySelectorAll('[data-theme]').forEach(b => b.classList.toggle('active', b.dataset.theme===theme));
+      document.querySelectorAll('[data-sound]').forEach(b => b.classList.toggle('active', (b.dataset.sound==='on')===soundOn));
+      document.querySelectorAll('[data-vib]').forEach(b => b.classList.toggle('active', (b.dataset.vib==='on')===vibOn));
       $('settingsOverlay').classList.add('show');
+      sfxClick();
     }
 
     document.querySelectorAll('[data-diff]').forEach(btn => {
@@ -1094,32 +890,62 @@
         localStorage.setItem('gyp_diff', difficulty);
         document.querySelectorAll('[data-diff]').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+        sfxClick();
       };
     });
-
     document.querySelectorAll('[data-mode]').forEach(btn => {
       btn.onclick = () => {
         mode = btn.dataset.mode;
         document.querySelectorAll('[data-mode]').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        updateLabels();
-        updateGameTitle();
+        updateLabels(); updateGameTitle();
+        sfxClick();
+      };
+    });
+    document.querySelectorAll('[data-theme]').forEach(btn => {
+      btn.onclick = () => {
+        theme = btn.dataset.theme;
+        localStorage.setItem('gyp_theme', theme);
+        document.querySelectorAll('[data-theme]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyTheme();
+        sfxClick();
+      };
+    });
+    document.querySelectorAll('[data-sound]').forEach(btn => {
+      btn.onclick = () => {
+        soundOn = btn.dataset.sound === 'on';
+        localStorage.setItem('gyp_sound', soundOn ? 'on' : 'off');
+        document.querySelectorAll('[data-sound]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        sfxClick();
+      };
+    });
+    document.querySelectorAll('[data-vib]').forEach(btn => {
+      btn.onclick = () => {
+        vibOn = btn.dataset.vib === 'on';
+        localStorage.setItem('gyp_vib', vibOn ? 'on' : 'off');
+        document.querySelectorAll('[data-vib]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (vibOn) vibrate(40);
+        sfxClick();
       };
     });
 
     $('btnLang').onclick = () => {
-      lang = lang === 'fa' ? 'en' : 'fa';
+      lang = lang==='fa' ? 'en' : 'fa';
       localStorage.setItem('gyp_lang', lang);
       applyLanguage();
+      sfxClick();
     };
 
     $('handLeft').onclick = () => onHandClick('left');
     $('handRight').onclick = () => onHandClick('right');
-
     $('mainBtn').onclick = confirmHide;
     $('switchBtn').onclick = switchFlower;
-    $('nextRoundBtn').onclick = nextRound;
+    $('nextRoundBtn').onclick = () => { sfxClick(); nextRound(); };
 
+    applyTheme();
     applyLanguage();
     updateStatsDisplay();
   </script>
