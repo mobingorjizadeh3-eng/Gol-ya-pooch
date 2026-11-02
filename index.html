@@ -3,217 +3,156 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#1a1a2e" />
   <title>گل یا پوچ | Gol ya Poch</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
     :root {
-      --bg1: #0f0f1a;
-      --bg2: #1a1a2e;
-      --card: rgba(255,255,255,0.06);
-      --border: rgba(255,255,255,0.1);
-      --gold: #ffd700;
-      --gold-dark: #e6b800;
-      --green: #00e676;
-      --red: #ff5252;
-      --text: #ffffff;
-      --text-muted: rgba(255,255,255,0.65);
+      --bg1: #0f0f1a; --bg2: #1a1a2e;
+      --card: rgba(255,255,255,0.06); --border: rgba(255,255,255,0.1);
+      --gold: #ffd700; --gold-dark: #e6b800;
+      --green: #00e676; --red: #ff5252;
+      --text: #ffffff; --text-muted: rgba(255,255,255,0.65);
       --hand-bg: linear-gradient(165deg, #252545, #1a1a32);
     }
-
-    body.theme-classic {
-      --bg1: #0f0f1a; --bg2: #1a1a2e; --gold: #ffd700; --gold-dark: #e6b800;
-      --hand-bg: linear-gradient(165deg, #252545, #1a1a32);
-    }
-    body.theme-traditional {
-      --bg1: #1c1209; --bg2: #2c1c0f; --gold: #e8b86d; --gold-dark: #c9954a;
-      --card: rgba(232,184,109,0.08); --border: rgba(232,184,109,0.18);
-      --hand-bg: linear-gradient(165deg, #3d2b1a, #2a1c10);
-    }
-    body.theme-neon {
-      --bg1: #0a0a12; --bg2: #120a1f; --gold: #00f5d4; --gold-dark: #00c4a7;
-      --card: rgba(0,245,212,0.06); --border: rgba(0,245,212,0.15);
-      --hand-bg: linear-gradient(165deg, #1a1030, #120a22);
-      --green: #39ff14; --red: #ff2d55;
-    }
-    body.theme-cafe {
-      --bg1: #1a1410; --bg2: #2a2118; --gold: #d4a373; --gold-dark: #b0895a;
-      --card: rgba(212,163,115,0.08); --border: rgba(212,163,115,0.18);
-      --hand-bg: linear-gradient(165deg, #3a2e22, #2a2118);
-    }
-    body.theme-night {
-      --bg1: #05050a; --bg2: #0c0c14; --gold: #a78bfa; --gold-dark: #8b5cf6;
-      --card: rgba(167,139,250,0.07); --border: rgba(167,139,250,0.15);
-      --hand-bg: linear-gradient(165deg, #1a1525, #100e18);
-    }
+    body.theme-classic { --bg1:#0f0f1a; --bg2:#1a1a2e; --gold:#ffd700; --gold-dark:#e6b800; --hand-bg:linear-gradient(165deg,#252545,#1a1a32); }
+    body.theme-traditional { --bg1:#1c1209; --bg2:#2c1c0f; --gold:#e8b86d; --gold-dark:#c9954a; --card:rgba(232,184,109,0.08); --border:rgba(232,184,109,0.18); --hand-bg:linear-gradient(165deg,#3d2b1a,#2a1c10); }
+    body.theme-neon { --bg1:#0a0a12; --bg2:#120a1f; --gold:#00f5d4; --gold-dark:#00c4a7; --card:rgba(0,245,212,0.06); --border:rgba(0,245,212,0.15); --hand-bg:linear-gradient(165deg,#1a1030,#120a22); --green:#39ff14; --red:#ff2d55; }
+    body.theme-cafe { --bg1:#1a1410; --bg2:#2a2118; --gold:#d4a373; --gold-dark:#b0895a; --card:rgba(212,163,115,0.08); --border:rgba(212,163,115,0.18); --hand-bg:linear-gradient(165deg,#3a2e22,#2a2118); }
+    body.theme-night { --bg1:#05050a; --bg2:#0c0c14; --gold:#a78bfa; --gold-dark:#8b5cf6; --card:rgba(167,139,250,0.07); --border:rgba(167,139,250,0.15); --hand-bg:linear-gradient(165deg,#1a1525,#100e18); }
 
     * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; user-select:none; }
-
     body {
-      font-family: 'Vazirmatn', 'Inter', Tahoma, sans-serif;
-      background: linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 55%, #0d0d18 100%);
-      min-height: 100vh;
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      overflow-x: hidden;
-      padding: 16px 14px 30px;
-      transition: background 0.4s ease;
+      font-family:'Vazirmatn','Inter',Tahoma,sans-serif;
+      background:linear-gradient(160deg,var(--bg1) 0%,var(--bg2) 55%,#0d0d18 100%);
+      min-height:100vh; color:var(--text); display:flex; flex-direction:column;
+      align-items:center; overflow-x:hidden; padding:16px 14px 30px; transition:background .4s ease;
     }
-    body.en { font-family: 'Inter', 'Vazirmatn', sans-serif; direction: ltr; }
+    body.en { font-family:'Inter','Vazirmatn',sans-serif; direction:ltr; }
 
-    .screen { display:none; width:100%; max-width:400px; flex-direction:column; align-items:center; animation:fadeIn 0.35s ease; }
+    .screen { display:none; width:100%; max-width:400px; flex-direction:column; align-items:center; animation:fadeIn .35s ease; }
     .screen.active { display:flex; }
     @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 
-    .logo {
-      font-size: 2.3rem; font-weight:700;
-      background: linear-gradient(90deg, var(--gold), var(--gold-dark));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      margin-bottom:6px;
-    }
-    .subtitle { font-size:0.88rem; color:var(--text-muted); margin-bottom:24px; }
+    .logo { font-size:2.3rem; font-weight:700; background:linear-gradient(90deg,var(--gold),var(--gold-dark)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:4px; }
+    .subtitle { font-size:.86rem; color:var(--text-muted); margin-bottom:20px; }
+    .version { font-size:.7rem; color:rgba(255,255,255,.3); margin-bottom:18px; }
 
-    .stats-row { display:flex; gap:10px; width:100%; margin-bottom:24px; }
-    .stat-card {
-      flex:1; background:var(--card); border:1px solid var(--border);
-      border-radius:14px; padding:12px 8px; text-align:center;
-    }
-    .stat-card .num { font-size:1.4rem; font-weight:700; color:var(--gold); }
-    .stat-card .lbl { font-size:0.7rem; color:var(--text-muted); margin-top:2px; }
+    .stats-row { display:flex; gap:10px; width:100%; margin-bottom:22px; }
+    .stat-card { flex:1; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:12px 8px; text-align:center; }
+    .stat-card .num { font-size:1.35rem; font-weight:700; color:var(--gold); }
+    .stat-card .lbl { font-size:.68rem; color:var(--text-muted); margin-top:2px; }
 
     .menu-btn {
-      width:100%; padding:15px; border-radius:15px; border:none;
-      font-family:inherit; font-size:1.02rem; font-weight:600; cursor:pointer;
-      margin-bottom:11px; transition:transform 0.15s; display:flex;
-      align-items:center; justify-content:center; gap:8px;
+      width:100%; padding:14px; border-radius:15px; border:none; font-family:inherit;
+      font-size:1rem; font-weight:600; cursor:pointer; margin-bottom:10px;
+      transition:transform .15s; display:flex; align-items:center; justify-content:center; gap:8px;
     }
-    .menu-btn:active { transform:scale(0.97); }
+    .menu-btn:active { transform:scale(.97); }
     .menu-btn.primary { background:linear-gradient(135deg,var(--gold),var(--gold-dark)); color:#1a1a2e; }
     .menu-btn.secondary { background:var(--card); color:var(--text); border:1px solid var(--border); }
-    .menu-btn.ghost { background:transparent; color:var(--text-muted); font-size:0.88rem; }
+    .menu-btn.ghost { background:transparent; color:var(--text-muted); font-size:.86rem; }
 
-    .top-bar { width:100%; display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
-    .icon-btn {
-      width:40px; height:40px; border-radius:11px; background:var(--card);
-      border:1px solid var(--border); color:var(--text); font-size:1.05rem;
-      display:flex; align-items:center; justify-content:center; cursor:pointer;
-    }
+    .top-bar { width:100%; display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+    .icon-btn { width:40px; height:40px; border-radius:11px; background:var(--card); border:1px solid var(--border); color:var(--text); font-size:1.05rem; display:flex; align-items:center; justify-content:center; cursor:pointer; }
 
-    .score-board { display:flex; gap:10px; width:100%; margin-bottom:12px; }
-    .score-box {
-      flex:1; background:var(--card); border:1px solid var(--border);
-      border-radius:14px; padding:11px; text-align:center; transition:border-color 0.3s;
-    }
-    .score-box.active-turn { border-color:var(--gold); box-shadow:0 0 12px color-mix(in srgb, var(--gold) 25%, transparent); }
-    .score-box .label { font-size:0.7rem; color:var(--text-muted); margin-bottom:2px; }
-    .score-box .value { font-size:1.5rem; font-weight:700; color:var(--gold); }
+    .score-board { display:flex; gap:10px; width:100%; margin-bottom:10px; }
+    .score-box { flex:1; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:10px; text-align:center; transition:border-color .3s; }
+    .score-box.active-turn { border-color:var(--gold); box-shadow:0 0 12px color-mix(in srgb,var(--gold) 25%,transparent); }
+    .score-box .label { font-size:.68rem; color:var(--text-muted); margin-bottom:2px; }
+    .score-box .value { font-size:1.45rem; font-weight:700; color:var(--gold); }
 
-    .target-bar {
-      width:100%; height:6px; background:rgba(255,255,255,0.08);
-      border-radius:10px; margin-bottom:16px; overflow:hidden; display:flex;
-    }
-    .target-fill-1 { height:100%; background:var(--gold); transition:width 0.4s ease; }
-    .target-fill-2 { height:100%; background:var(--red); transition:width 0.4s ease; }
+    .target-bar { width:100%; height:6px; background:rgba(255,255,255,.08); border-radius:10px; margin-bottom:14px; overflow:hidden; display:flex; }
+    .target-fill-1 { height:100%; background:var(--gold); transition:width .4s ease; }
+    .target-fill-2 { height:100%; background:var(--red); transition:width .4s ease; }
 
-    .status {
-      width:100%; background:var(--card); border:1px solid var(--border);
-      border-radius:15px; padding:11px 15px; font-size:0.93rem; font-weight:500;
-      text-align:center; margin-bottom:20px; min-height:46px;
-      display:flex; align-items:center; justify-content:center;
-    }
+    .status { width:100%; background:var(--card); border:1px solid var(--border); border-radius:15px; padding:11px 15px; font-size:.92rem; font-weight:500; text-align:center; margin-bottom:18px; min-height:46px; display:flex; align-items:center; justify-content:center; }
 
-    .hands-container {
-      display:flex; justify-content:center; gap:22px;
-      margin-bottom:24px; position:relative; min-height:155px;
-    }
+    .hands-container { display:flex; justify-content:center; gap:22px; margin-bottom:22px; position:relative; min-height:150px; }
     .hand {
-      width:120px; height:140px; background:var(--hand-bg);
-      border-radius:20px; display:flex; flex-direction:column;
-      align-items:center; justify-content:center; cursor:pointer;
-      transition:all 0.25s cubic-bezier(0.34,1.3,0.64,1);
-      border:3px solid rgba(255,255,255,0.07);
-      position:relative; box-shadow:0 10px 26px rgba(0,0,0,0.4);
+      width:118px; height:138px; background:var(--hand-bg); border-radius:20px;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      cursor:pointer; transition:all .25s cubic-bezier(.34,1.3,.64,1);
+      border:3px solid rgba(255,255,255,.07); position:relative; box-shadow:0 10px 26px rgba(0,0,0,.4);
     }
-    .hand:active { transform:scale(0.95); }
-    .hand.selected {
-      border-color:var(--gold); box-shadow:0 0 20px color-mix(in srgb, var(--gold) 35%, transparent);
-      transform:translateY(-7px);
-    }
-    .hand.correct { border-color:var(--green); box-shadow:0 0 22px rgba(0,230,118,0.4); }
-    .hand.wrong { border-color:var(--red); box-shadow:0 0 22px rgba(255,82,82,0.35); }
-    .hand-icon { font-size:2.9rem; margin-bottom:5px; transition:transform 0.3s; }
+    .hand:active { transform:scale(.95); }
+    .hand.selected { border-color:var(--gold); box-shadow:0 0 20px color-mix(in srgb,var(--gold) 35%,transparent); transform:translateY(-7px); }
+    .hand.correct { border-color:var(--green); box-shadow:0 0 22px rgba(0,230,118,.4); }
+    .hand.wrong { border-color:var(--red); box-shadow:0 0 22px rgba(255,82,82,.35); }
+    .hand-icon { font-size:2.8rem; margin-bottom:5px; transition:transform .3s; }
     .hand.selected .hand-icon { transform:scale(1.12); }
-    .hand-label { font-size:0.78rem; color:var(--text-muted); font-weight:500; }
+    .hand-label { font-size:.76rem; color:var(--text-muted); font-weight:500; }
 
-    .flower {
-      position:absolute; font-size:2rem; opacity:0;
-      transition:all 0.45s cubic-bezier(0.34,1.56,0.64,1);
-      pointer-events:none; z-index:10;
-      filter:drop-shadow(0 4px 8px rgba(0,0,0,0.4));
-    }
+    .flower { position:absolute; font-size:1.95rem; opacity:0; transition:all .45s cubic-bezier(.34,1.56,.64,1); pointer-events:none; z-index:10; filter:drop-shadow(0 4px 8px rgba(0,0,0,.4)); }
     .flower.visible { opacity:1; }
 
-    .controls { display:flex; flex-direction:column; gap:10px; width:100%; }
-    .btn {
-      font-family:inherit; border:none; border-radius:14px; padding:13px 16px;
-      font-size:0.98rem; font-weight:600; cursor:pointer; transition:all 0.2s;
-      display:flex; align-items:center; justify-content:center; gap:7px;
-    }
-    .btn:active { transform:scale(0.97); }
+    .controls { display:flex; flex-direction:column; gap:9px; width:100%; }
+    .btn { font-family:inherit; border:none; border-radius:14px; padding:13px 16px; font-size:.96rem; font-weight:600; cursor:pointer; transition:all .2s; display:flex; align-items:center; justify-content:center; gap:7px; }
+    .btn:active { transform:scale(.97); }
     .btn-primary { background:linear-gradient(135deg,var(--gold),var(--gold-dark)); color:#1a1a2e; }
     .btn-secondary { background:var(--card); color:var(--text); border:1px solid var(--border); }
-    .btn-danger { background:rgba(255,82,82,0.14); color:#ff8a80; border:1px solid rgba(255,82,82,0.22); }
+    .btn-danger { background:rgba(255,82,82,.14); color:#ff8a80; border:1px solid rgba(255,82,82,.22); }
     .hidden { display:none !important; }
 
-    .overlay {
-      position:fixed; inset:0; background:rgba(0,0,0,0.8);
-      display:flex; align-items:center; justify-content:center;
-      z-index:100; opacity:0; pointer-events:none; transition:opacity 0.3s; padding:18px;
-    }
+    .overlay { position:fixed; inset:0; background:rgba(0,0,0,.8); display:flex; align-items:center; justify-content:center; z-index:100; opacity:0; pointer-events:none; transition:opacity .3s; padding:18px; }
     .overlay.show { opacity:1; pointer-events:auto; }
-    .modal {
-      background:linear-gradient(165deg, #1e1e32, #161625);
-      border-radius:20px; padding:26px 22px; text-align:center;
-      max-width:330px; width:100%; border:1px solid var(--border);
-      transform:scale(0.92); transition:transform 0.3s cubic-bezier(0.34,1.4,0.64,1);
-      max-height:85vh; overflow-y:auto;
-    }
+    .modal { background:linear-gradient(165deg,#1e1e32,#161625); border-radius:20px; padding:24px 20px; text-align:center; max-width:340px; width:100%; border:1px solid var(--border); transform:scale(.92); transition:transform .3s cubic-bezier(.34,1.4,.64,1); max-height:88vh; overflow-y:auto; }
     .overlay.show .modal { transform:scale(1); }
-    .modal-icon { font-size:3rem; margin-bottom:8px; }
-    .modal-title { font-size:1.3rem; font-weight:700; margin-bottom:6px; }
-    .modal-msg { font-size:0.9rem; color:var(--text-muted); margin-bottom:20px; line-height:1.5; }
+    .modal-icon { font-size:2.9rem; margin-bottom:8px; }
+    .modal-title { font-size:1.25rem; font-weight:700; margin-bottom:6px; }
+    .modal-msg { font-size:.88rem; color:var(--text-muted); margin-bottom:18px; line-height:1.5; }
 
-    .settings-group { text-align:right; margin-bottom:16px; }
+    .settings-group { text-align:right; margin-bottom:15px; }
     body.en .settings-group { text-align:left; }
-    .settings-group label { display:block; font-size:0.82rem; color:var(--text-muted); margin-bottom:7px; }
+    .settings-group label { display:block; font-size:.8rem; color:var(--text-muted); margin-bottom:6px; }
     .option-row { display:flex; gap:7px; flex-wrap:wrap; }
-    .option-btn {
-      flex:1; min-width:70px; padding:9px 5px; border-radius:10px;
-      border:2px solid var(--border); background:transparent; color:var(--text);
-      font-family:inherit; font-size:0.78rem; font-weight:500; cursor:pointer; transition:all 0.2s;
-    }
-    .option-btn.active { border-color:var(--gold); background:color-mix(in srgb, var(--gold) 12%, transparent); color:var(--gold); }
+    .option-btn { flex:1; min-width:68px; padding:9px 5px; border-radius:10px; border:2px solid var(--border); background:transparent; color:var(--text); font-family:inherit; font-size:.76rem; font-weight:500; cursor:pointer; transition:all .2s; }
+    .option-btn.active { border-color:var(--gold); background:color-mix(in srgb,var(--gold) 12%,transparent); color:var(--gold); }
 
-    .switching { animation:switchAnim 0.55s ease; }
+    .name-input {
+      width:100%; padding:11px 14px; border-radius:12px; border:1px solid var(--border);
+      background:rgba(255,255,255,.05); color:var(--text); font-family:inherit; font-size:.92rem;
+      margin-bottom:8px; outline:none;
+    }
+    .name-input:focus { border-color:var(--gold); }
+
+    .credits-box {
+      background:rgba(255,255,255,.04); border:1px solid var(--border);
+      border-radius:14px; padding:16px; margin:14px 0; text-align:center;
+    }
+    .credits-box .role { font-size:.72rem; color:var(--text-muted); margin-bottom:2px; }
+    .credits-box .name { font-size:1.05rem; font-weight:600; color:var(--gold); margin-bottom:10px; }
+    .credits-box .name:last-child { margin-bottom:0; }
+
+    .switching { animation:switchAnim .55s ease; }
     @keyframes switchAnim {
       0%{transform:translateX(0)} 30%{transform:translateX(-12px) rotate(-4deg)}
       60%{transform:translateX(12px) rotate(4deg)} 100%{transform:translateX(0)}
     }
 
-    .how-to { text-align:right; font-size:0.88rem; line-height:1.7; color:var(--text-muted); }
+    .how-to { text-align:right; font-size:.86rem; line-height:1.7; color:var(--text-muted); }
     body.en .how-to { text-align:left; }
     .how-to li { margin-bottom:7px; }
-    .footer { margin-top:22px; font-size:0.7rem; color:rgba(255,255,255,0.3); text-align:center; }
-    .match-progress { font-size:0.78rem; color:var(--text-muted); text-align:center; margin-bottom:8px; }
+    .footer { margin-top:18px; font-size:.68rem; color:rgba(255,255,255,.28); text-align:center; }
+    .match-progress { font-size:.76rem; color:var(--text-muted); text-align:center; margin-bottom:8px; }
+
+    .confetti-piece {
+      position:fixed; width:8px; height:8px; top:-10px; z-index:200;
+      animation:confettiFall 2.5s ease-out forwards;
+    }
+    @keyframes confettiFall {
+      0% { transform:translateY(0) rotate(0deg); opacity:1; }
+      100% { transform:translateY(100vh) rotate(720deg); opacity:0; }
+    }
   </style>
 </head>
 <body class="theme-classic">
   <!-- HOME -->
   <div class="screen active" id="homeScreen">
     <div class="logo" id="logoText">🌸 گل یا پوچ</div>
-    <div class="subtitle" id="subtitleText"> سازنده:مبین گرجی زاده تا ۱۰ امتیاز • چند تم</div>
+    <div class="subtitle" id="subtitleText">تا ۱۰ امتیاز • چند تم</div>
+    <div class="version">v3.0</div>
 
     <div class="stats-row">
       <div class="stat-card"><div class="num" id="statWins">0</div><div class="lbl" id="lblWins">بردها</div></div>
@@ -224,15 +163,16 @@
     <button class="menu-btn primary" id="btnPlay">شروع بازی</button>
     <button class="menu-btn secondary" id="btnHowTo">چطور بازی کنیم؟</button>
     <button class="menu-btn secondary" id="btnSettings">تنظیمات</button>
+    <button class="menu-btn secondary" id="btnAbout">درباره ما</button>
     <button class="menu-btn ghost" id="btnLang">English</button>
-    <div class="footer">Gol ya Poch v2 • Sound + Themes</div>
+    <div class="footer">Made with ❤️ by Mobin & Grok</div>
   </div>
 
   <!-- GAME -->
   <div class="screen" id="gameScreen">
     <div class="top-bar">
       <button class="icon-btn" id="btnBack">←</button>
-      <div style="font-size:0.88rem;font-weight:600;" id="gameTitle">مقابل کامپیوتر</div>
+      <div style="font-size:.86rem;font-weight:600;" id="gameTitle">مقابل کامپیوتر</div>
       <button class="icon-btn" id="btnGameSettings">⚙</button>
     </div>
 
@@ -291,15 +231,28 @@
       <div class="modal-icon" id="matchIcon">🏆</div>
       <div class="modal-title" id="matchTitle">برنده شدی!</div>
       <div class="modal-msg" id="matchMessage">به ۱۰ امتیاز رسیدی</div>
+      <button class="btn btn-primary" id="btnShare" style="width:100%;margin-bottom:8px;">اشتراک‌گذاری نتیجه 📤</button>
       <button class="btn btn-primary" id="btnNewMatch" style="width:100%;margin-bottom:8px;">بازی جدید</button>
       <button class="btn btn-secondary" id="btnBackHome" style="width:100%;">صفحه اصلی</button>
+    </div>
+  </div>
+
+  <!-- NAME INPUT -->
+  <div class="overlay" id="nameOverlay">
+    <div class="modal">
+      <div class="modal-title" id="nameTitle">اسم بازیکن‌ها</div>
+      <div class="modal-msg" id="nameMsg" style="margin-bottom:12px;">اسم‌ها رو وارد کن</div>
+      <input class="name-input" id="inputName1" placeholder="بازیکن ۱" maxlength="14" />
+      <input class="name-input" id="inputName2" placeholder="بازیکن ۲" maxlength="14" />
+      <button class="btn btn-primary" id="btnStartLocal" style="width:100%;margin-top:8px;">شروع</button>
+      <button class="btn btn-secondary" id="btnCancelName" style="width:100%;margin-top:8px;">انصراف</button>
     </div>
   </div>
 
   <!-- SETTINGS -->
   <div class="overlay" id="settingsOverlay">
     <div class="modal" style="text-align:right;">
-      <div class="modal-title" id="settingsTitle" style="text-align:center;margin-bottom:18px;">تنظیمات</div>
+      <div class="modal-title" id="settingsTitle" style="text-align:center;margin-bottom:16px;">تنظیمات</div>
 
       <div class="settings-group">
         <label id="lblTheme">تم / زمین</label>
@@ -347,7 +300,26 @@
         </div>
       </div>
 
-      <button class="btn btn-primary" id="btnCloseSettings" style="width:100%;margin-top:8px;">بستن</button>
+      <button class="btn btn-primary" id="btnCloseSettings" style="width:100%;margin-top:6px;">بستن</button>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="overlay" id="aboutOverlay">
+    <div class="modal">
+      <div class="modal-title" id="aboutTitle">درباره ما</div>
+      <div class="credits-box">
+        <div class="role" id="roleMain">سازنده اصلی</div>
+        <div class="name">Mobin Gorjizadeh</div>
+        <div class="role" id="roleDesign">طراح پروژه</div>
+        <div class="name">Grok</div>
+      </div>
+      <div class="modal-msg" id="aboutDesc" style="font-size:.82rem;">
+        نسخه وب بازی سنتی ایرانی گل یا پوچ<br>
+        ساخته شده با علاقه برای جامعه گیمینگ
+      </div>
+      <div style="font-size:.75rem;color:var(--text-muted);margin-bottom:16px;" id="aboutVersion">نسخه ۳.۰</div>
+      <button class="btn btn-primary" id="btnCloseAbout" style="width:100%">بستن</button>
     </div>
   </div>
 
@@ -355,7 +327,7 @@
   <div class="overlay" id="howtoOverlay">
     <div class="modal">
       <div class="modal-title" id="howtoTitle">چطور بازی کنیم؟</div>
-      <ol class="how-to" id="howtoList" style="margin:14px 0 20px;padding-right:18px;"></ol>
+      <ol class="how-to" id="howtoList" style="margin:14px 0 18px;padding-right:18px;"></ol>
       <button class="btn btn-primary" id="btnCloseHowto" style="width:100%">متوجه شدم</button>
     </div>
   </div>
@@ -365,7 +337,7 @@
       fa: {
         logo:"🌸 گل یا پوچ", subtitle:"تا ۱۰ امتیاز • چند تم",
         wins:"بردها", streak:"سری برد", best:"بهترین",
-        play:"شروع بازی", howto:"چطور بازی کنیم؟", settings:"تنظیمات", langBtn:"English",
+        play:"شروع بازی", howto:"چطور بازی کنیم؟", settings:"تنظیمات", about:"درباره ما", langBtn:"English",
         you:"شما", computer:"کامپیوتر", player1:"بازیکن ۱", player2:"بازیکن ۲",
         left:"دست چپ", right:"دست راست", ready:"آماده ✓", switch:"جابه‌جایی گل 🔄",
         quit:"خروج از بازی", next:"دور بعد", settingsTitle:"تنظیمات",
@@ -386,8 +358,8 @@
         aiThinking:"کامپیوتر در حال حدس زدن...",
         aiHiding:"کامپیوتر داره گل رو مخفی می‌کنه...",
         yourGuess:"حدس بزن گل کدوم دسته!",
-        p1Hide:"بازیکن ۱: گل را مخفی کن", p2Hide:"بازیکن ۲: گل را مخفی کن",
-        p1Guess:"بازیکن ۱: حدس بزن", p2Guess:"بازیکن ۲: حدس بزن",
+        p1Hide:"{name}: گل را مخفی کن", p2Hide:"{name}: گل را مخفی کن",
+        p1Guess:"{name}: حدس بزن", p2Guess:"{name}: حدس بزن",
         aiCorrect:"کامپیوتر درست حدس زد!", youBluffed:"آفرین! گولش زدی",
         youCorrect:"دمت گرم! درست حدس زدی", youWrong:"اشتباه حدس زدی!",
         pGuessCorrect:"درست حدس زد!", pBluffed:"برنده شد!",
@@ -397,13 +369,19 @@
         theme:"تم / زمین", classic:"کلاسیک", traditional:"سنتی", neon:"نئون", cafe:"قهوه‌خانه", night:"شب",
         sound:"صدا", vibrate:"ویبره", on:"روشن", off:"خاموش",
         youWinMatch:"برنده شدی! 🏆", aiWinMatch:"کامپیوتر برنده شد",
-        p1WinMatch:"بازیکن ۱ برنده شد!", p2WinMatch:"بازیکن ۲ برنده شد!",
-        reach10:"به ۱۰ امتیاز رسیدی", newMatch:"بازی جدید", backHome:"صفحه اصلی"
+        p1WinMatch:"{name} برنده شد!", p2WinMatch:"{name} برنده شد!",
+        reach10:"به ۱۰ امتیاز رسیدی", newMatch:"بازی جدید", backHome:"صفحه اصلی",
+        share:"اشتراک‌گذاری نتیجه 📤",
+        aboutTitle:"درباره ما", roleMain:"سازنده اصلی", roleDesign:"طراح پروژه",
+        aboutDesc:"نسخه وب بازی سنتی ایرانی گل یا پوچ<br>ساخته شده با علاقه برای جامعه گیمینگ",
+        aboutVersion:"نسخه ۳.۰",
+        nameTitle:"اسم بازیکن‌ها", nameMsg:"اسم‌ها رو وارد کن (اختیاری)", startLocal:"شروع", cancel:"انصراف",
+        shareText:"من در بازی گل یا پوچ {score} - {opp} برنده شدم! 🌸\nبیا تو هم بازی کن:"
       },
       en: {
         logo:"🌸 Gol ya Poch", subtitle:"First to 10 • Multiple Themes",
         wins:"Wins", streak:"Streak", best:"Best",
-        play:"Play", howto:"How to Play", settings:"Settings", langBtn:"فارسی",
+        play:"Play", howto:"How to Play", settings:"Settings", about:"About", langBtn:"فارسی",
         you:"You", computer:"Computer", player1:"Player 1", player2:"Player 2",
         left:"Left Hand", right:"Right Hand", ready:"Ready ✓", switch:"Switch Flower 🔄",
         quit:"Quit Game", next:"Next Round", settingsTitle:"Settings",
@@ -424,8 +402,8 @@
         aiThinking:"Computer is guessing...",
         aiHiding:"Computer is hiding the flower...",
         yourGuess:"Guess which hand has the flower!",
-        p1Hide:"Player 1: Hide the flower", p2Hide:"Player 2: Hide the flower",
-        p1Guess:"Player 1: Make your guess", p2Guess:"Player 2: Make your guess",
+        p1Hide:"{name}: Hide the flower", p2Hide:"{name}: Hide the flower",
+        p1Guess:"{name}: Make your guess", p2Guess:"{name}: Make your guess",
         aiCorrect:"Computer guessed right!", youBluffed:"Nice bluff!",
         youCorrect:"Correct guess!", youWrong:"Wrong guess!",
         pGuessCorrect:"guessed correctly!", pBluffed:"wins the round!",
@@ -435,8 +413,14 @@
         theme:"Theme / Arena", classic:"Classic", traditional:"Traditional", neon:"Neon", cafe:"Cafe", night:"Night",
         sound:"Sound", vibrate:"Vibration", on:"On", off:"Off",
         youWinMatch:"You Win! 🏆", aiWinMatch:"Computer Wins",
-        p1WinMatch:"Player 1 Wins!", p2WinMatch:"Player 2 Wins!",
-        reach10:"Reached 10 points", newMatch:"New Match", backHome:"Home"
+        p1WinMatch:"{name} Wins!", p2WinMatch:"{name} Wins!",
+        reach10:"Reached 10 points", newMatch:"New Match", backHome:"Home",
+        share:"Share Result 📤",
+        aboutTitle:"About", roleMain:"Main Creator", roleDesign:"Project Designer",
+        aboutDesc:"Web version of the traditional Iranian game Gol ya Poch<br>Made with love for the gaming community",
+        aboutVersion:"Version 3.0",
+        nameTitle:"Player Names", nameMsg:"Enter names (optional)", startLocal:"Start", cancel:"Cancel",
+        shareText:"I won a Gol ya Poch match {score} - {opp}! 🌸\nCome play:"
       }
     };
 
@@ -453,6 +437,8 @@
     let selectedGuess = null;
     let isSwitching = false;
     const TARGET = 10;
+    let name1 = '';
+    let name2 = '';
 
     let totalWins = +localStorage.getItem('gyp_wins') || 0;
     let currentStreak = +localStorage.getItem('gyp_streak') || 0;
@@ -462,31 +448,40 @@
     const t = key => i18n[lang][key];
 
     let audioCtx = null;
-    function ensureAudio() {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
+    function ensureAudio() { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
     function playTone(freq, duration, type='sine', gain=0.08) {
       if (!soundOn) return;
       try {
         ensureAudio();
         const osc = audioCtx.createOscillator();
         const g = audioCtx.createGain();
-        osc.type = type;
-        osc.frequency.value = freq;
+        osc.type = type; osc.frequency.value = freq;
         g.gain.setValueAtTime(gain, audioCtx.currentTime);
         g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
         osc.connect(g); g.connect(audioCtx.destination);
         osc.start(); osc.stop(audioCtx.currentTime + duration);
       } catch(e) {}
     }
-    function sfxClick() { playTone(600, 0.06, 'square', 0.04); }
-    function sfxSwitch() { playTone(400, 0.08); setTimeout(()=>playTone(500,0.08),70); }
-    function sfxCorrect() { playTone(520,0.1); setTimeout(()=>playTone(660,0.12),90); setTimeout(()=>playTone(780,0.15),180); }
-    function sfxWrong() { playTone(300,0.15,'sawtooth',0.06); setTimeout(()=>playTone(220,0.2,'sawtooth',0.05),120); }
-    function sfxWin() { playTone(523,0.12); setTimeout(()=>playTone(659,0.12),100); setTimeout(()=>playTone(784,0.2),200); }
+    function sfxClick() { playTone(600, .06, 'square', .04); }
+    function sfxSwitch() { playTone(400,.08); setTimeout(()=>playTone(500,.08),70); }
+    function sfxCorrect() { playTone(520,.1); setTimeout(()=>playTone(660,.12),90); setTimeout(()=>playTone(780,.15),180); }
+    function sfxWrong() { playTone(300,.15,'sawtooth',.06); setTimeout(()=>playTone(220,.2,'sawtooth',.05),120); }
+    function sfxWin() { playTone(523,.12); setTimeout(()=>playTone(659,.12),100); setTimeout(()=>playTone(784,.2),200); }
 
-    function vibrate(pattern=[40]) {
-      if (vibOn && navigator.vibrate) navigator.vibrate(pattern);
+    function vibrate(pattern=[40]) { if (vibOn && navigator.vibrate) navigator.vibrate(pattern); }
+
+    function spawnConfetti() {
+      const colors = ['#ffd700','#00e676','#ff5252','#00f5d4','#a78bfa','#ff9f43'];
+      for (let i=0; i<40; i++) {
+        const el = document.createElement('div');
+        el.className = 'confetti-piece';
+        el.style.left = Math.random()*100 + 'vw';
+        el.style.background = colors[Math.floor(Math.random()*colors.length)];
+        el.style.animationDelay = (Math.random()*0.8) + 's';
+        el.style.borderRadius = Math.random()>.5 ? '50%' : '2px';
+        document.body.appendChild(el);
+        setTimeout(()=>el.remove(), 3000);
+      }
     }
 
     function applyLanguage() {
@@ -502,6 +497,7 @@
       $('btnPlay').textContent = t('play');
       $('btnHowTo').textContent = t('howto');
       $('btnSettings').textContent = t('settings');
+      $('btnAbout').textContent = t('about');
       $('btnLang').textContent = t('langBtn');
       $('lblLeft').textContent = t('left');
       $('lblRight').textContent = t('right');
@@ -535,6 +531,18 @@
       $('matchProgress').textContent = t('matchProgress');
       $('btnNewMatch').textContent = t('newMatch');
       $('btnBackHome').textContent = t('backHome');
+      $('btnShare').textContent = t('share');
+      $('aboutTitle').textContent = t('aboutTitle');
+      $('roleMain').textContent = t('roleMain');
+      $('roleDesign').textContent = t('roleDesign');
+      $('aboutDesc').innerHTML = t('aboutDesc');
+      $('aboutVersion').textContent = t('aboutVersion');
+      $('nameTitle').textContent = t('nameTitle');
+      $('nameMsg').textContent = t('nameMsg');
+      $('btnStartLocal').textContent = t('startLocal');
+      $('btnCancelName').textContent = t('cancel');
+      $('inputName1').placeholder = t('player1');
+      $('inputName2').placeholder = t('player2');
 
       const list = $('howtoList');
       list.innerHTML = '';
@@ -555,13 +563,16 @@
       if (lang==='en') document.body.classList.add('en');
     }
 
+    function getName1() { return name1 || t('player1'); }
+    function getName2() { return name2 || (mode==='ai' ? t('computer') : t('player2')); }
+
     function updateLabels() {
       if (mode==='ai') {
         $('label1').textContent = t('you');
         $('label2').textContent = t('computer');
       } else {
-        $('label1').textContent = t('player1');
-        $('label2').textContent = t('player2');
+        $('label1').textContent = getName1();
+        $('label2').textContent = getName2();
       }
     }
     function updateGameTitle() {
@@ -573,10 +584,8 @@
       $('statBest').textContent = bestStreak;
     }
     function updateScoreBar() {
-      const p1 = Math.min(score1 / TARGET * 50, 50);
-      const p2 = Math.min(score2 / TARGET * 50, 50);
-      $('fill1').style.width = p1 + '%';
-      $('fill2').style.width = p2 + '%';
+      $('fill1').style.width = Math.min(score1/TARGET*50,50) + '%';
+      $('fill2').style.width = Math.min(score2/TARGET*50,50) + '%';
     }
 
     function setStatus(txt) { $('status').textContent = txt; }
@@ -613,6 +622,14 @@
     }
 
     function startGame() {
+      if (mode==='local') {
+        $('nameOverlay').classList.add('show');
+        return;
+      }
+      reallyStart();
+    }
+
+    function reallyStart() {
       score1 = 0; score2 = 0;
       $('score1').textContent = '0';
       $('score2').textContent = '0';
@@ -635,7 +652,7 @@
         setStatus(t('hideNow'));
         enableHands(true);
       } else {
-        setStatus(t('p1Hide'));
+        setStatus(t('p1Hide').replace('{name}', getName1()));
         enableHands(true);
       }
     }
@@ -648,9 +665,7 @@
         const el = $(hand==='left'?'handLeft':'handRight');
         el.classList.add('switching');
         setTimeout(()=>el.classList.remove('switching'),550);
-        sfxSwitch();
-        vibrate(30);
-
+        sfxSwitch(); vibrate(30);
         setStatus(t('hiddenReady'));
         $('mainBtn').classList.remove('hidden');
         $('switchBtn').classList.remove('hidden');
@@ -666,8 +681,7 @@
 
     function confirmHide() {
       if (!flowerHand) return;
-      clearHandStates();
-      hideFlower();
+      clearHandStates(); hideFlower();
       phase = 'guessing';
       $('mainBtn').classList.add('hidden');
       $('switchBtn').classList.add('hidden');
@@ -685,7 +699,8 @@
         }, 900 + Math.random()*500);
       } else {
         const guesser = currentHider===1 ? 2 : 1;
-        setStatus(guesser===1 ? t('p1Guess') : t('p2Guess'));
+        const gName = guesser===1 ? getName1() : getName2();
+        setStatus((guesser===1 ? t('p1Guess') : t('p2Guess')).replace('{name}', gName));
         enableHands(true);
       }
     }
@@ -697,8 +712,7 @@
       clearHandStates();
       const el = $(flowerHand==='left'?'handLeft':'handRight');
       el.classList.add('selected','switching');
-      sfxSwitch();
-      vibrate(25);
+      sfxSwitch(); vibrate(25);
       setTimeout(()=>{ el.classList.remove('switching'); isSwitching=false; },550);
       setStatus(t('switched'));
     }
@@ -777,12 +791,14 @@
         const guesser = currentHider===1 ? 2 : 1;
         if (isCorrect) {
           if (guesser===1) score1++; else score2++;
-          title = `${guesser===1?t('player1'):t('player2')} ${t('pGuessCorrect')}`;
+          const gName = guesser===1 ? getName1() : getName2();
+          title = gName + ' ' + t('pGuessCorrect');
           icon = '🎯'; currentHider = guesser;
           sfxCorrect();
         } else {
           if (currentHider===1) score1++; else score2++;
-          title = `${currentHider===1?t('player1'):t('player2')} ${t('pBluffed')}`;
+          const hName = currentHider===1 ? getName1() : getName2();
+          title = hName + ' ' + t('pBluffed');
           icon = '🎭';
           sfxWrong();
         }
@@ -796,11 +812,8 @@
       $('resultMessage').textContent = msg;
 
       setTimeout(() => {
-        if (score1 >= TARGET || score2 >= TARGET) {
-          showMatchOver();
-        } else {
-          $('resultOverlay').classList.add('show');
-        }
+        if (score1 >= TARGET || score2 >= TARGET) showMatchOver();
+        else $('resultOverlay').classList.add('show');
       }, 600);
     }
 
@@ -809,14 +822,19 @@
       if (mode==='ai') {
         if (score1 >= TARGET) {
           title = t('youWinMatch'); icon = '🏆';
-          sfxWin(); vibrate([30,50,30,50,80]);
+          sfxWin(); vibrate([30,50,30,50,80]); spawnConfetti();
         } else {
           title = t('aiWinMatch'); icon = '🤖';
           sfxWrong();
         }
       } else {
-        if (score1 >= TARGET) { title = t('p1WinMatch'); icon = '🏆'; }
-        else { title = t('p2WinMatch'); icon = '🏆'; }
+        if (score1 >= TARGET) {
+          title = t('p1WinMatch').replace('{name}', getName1());
+          icon = '🏆'; spawnConfetti();
+        } else {
+          title = t('p2WinMatch').replace('{name}', getName2());
+          icon = '🏆'; spawnConfetti();
+        }
         sfxWin();
       }
       $('matchIcon').textContent = icon;
@@ -827,10 +845,8 @@
 
     function nextRound() {
       $('resultOverlay').classList.remove('show');
-      hideFlower();
-      clearHandStates();
-      flowerHand = null;
-      selectedGuess = null;
+      hideFlower(); clearHandStates();
+      flowerHand = null; selectedGuess = null;
       $('mainBtn').classList.add('hidden');
       $('switchBtn').classList.add('hidden');
       highlightTurn();
@@ -840,12 +856,11 @@
           phase = 'hiding';
           setStatus(t('hideNow'));
           enableHands(true);
-        } else {
-          aiHide();
-        }
+        } else aiHide();
       } else {
         phase = 'hiding';
-        setStatus(currentHider===1 ? t('p1Hide') : t('p2Hide'));
+        const hName = currentHider===1 ? getName1() : getName2();
+        setStatus((currentHider===1 ? t('p1Hide') : t('p2Hide')).replace('{name}', hName));
         enableHands(true);
       }
     }
@@ -857,6 +872,26 @@
       updateStatsDisplay();
     }
 
+    async function shareResult() {
+      const text = t('shareText')
+        .replace('{score}', score1)
+        .replace('{opp}', score2);
+      const url = window.location.href;
+      const full = text + '\n' + url;
+
+      if (navigator.share) {
+        try { await navigator.share({ text: full }); } catch(e) {}
+      } else {
+        try {
+          await navigator.clipboard.writeText(full);
+          alert(lang==='fa' ? 'کپی شد!' : 'Copied!');
+        } catch(e) {
+          prompt('Copy:', full);
+        }
+      }
+      sfxClick();
+    }
+
     $('btnPlay').onclick = () => { sfxClick(); startGame(); };
     $('btnBack').onclick = () => { sfxClick(); showScreen('homeScreen'); updateStatsDisplay(); };
     $('btnQuit').onclick = () => { sfxClick(); showScreen('homeScreen'); updateStatsDisplay(); };
@@ -866,9 +901,13 @@
       showScreen('homeScreen');
       updateStatsDisplay();
     };
+    $('btnShare').onclick = shareResult;
 
     $('btnHowTo').onclick = () => { sfxClick(); $('howtoOverlay').classList.add('show'); };
     $('btnCloseHowto').onclick = () => { sfxClick(); $('howtoOverlay').classList.remove('show'); };
+
+    $('btnAbout').onclick = () => { sfxClick(); $('aboutOverlay').classList.add('show'); };
+    $('btnCloseAbout').onclick = () => { sfxClick(); $('aboutOverlay').classList.remove('show'); };
 
     $('btnSettings').onclick = openSettings;
     $('btnGameSettings').onclick = openSettings;
@@ -889,8 +928,7 @@
         difficulty = btn.dataset.diff;
         localStorage.setItem('gyp_diff', difficulty);
         document.querySelectorAll('[data-diff]').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        sfxClick();
+        btn.classList.add('active'); sfxClick();
       };
     });
     document.querySelectorAll('[data-mode]').forEach(btn => {
@@ -898,8 +936,7 @@
         mode = btn.dataset.mode;
         document.querySelectorAll('[data-mode]').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        updateLabels(); updateGameTitle();
-        sfxClick();
+        updateLabels(); updateGameTitle(); sfxClick();
       };
     });
     document.querySelectorAll('[data-theme]').forEach(btn => {
@@ -908,8 +945,7 @@
         localStorage.setItem('gyp_theme', theme);
         document.querySelectorAll('[data-theme]').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        applyTheme();
-        sfxClick();
+        applyTheme(); sfxClick();
       };
     });
     document.querySelectorAll('[data-sound]').forEach(btn => {
@@ -917,8 +953,7 @@
         soundOn = btn.dataset.sound === 'on';
         localStorage.setItem('gyp_sound', soundOn ? 'on' : 'off');
         document.querySelectorAll('[data-sound]').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        sfxClick();
+        btn.classList.add('active'); sfxClick();
       };
     });
     document.querySelectorAll('[data-vib]').forEach(btn => {
@@ -927,15 +962,24 @@
         localStorage.setItem('gyp_vib', vibOn ? 'on' : 'off');
         document.querySelectorAll('[data-vib]').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        if (vibOn) vibrate(40);
-        sfxClick();
+        if (vibOn) vibrate(40); sfxClick();
       };
     });
 
     $('btnLang').onclick = () => {
       lang = lang==='fa' ? 'en' : 'fa';
       localStorage.setItem('gyp_lang', lang);
-      applyLanguage();
+      applyLanguage(); sfxClick();
+    };
+
+    $('btnStartLocal').onclick = () => {
+      name1 = $('inputName1').value.trim();
+      name2 = $('inputName2').value.trim();
+      $('nameOverlay').classList.remove('show');
+      reallyStart();
+    };
+    $('btnCancelName').onclick = () => {
+      $('nameOverlay').classList.remove('show');
       sfxClick();
     };
 
